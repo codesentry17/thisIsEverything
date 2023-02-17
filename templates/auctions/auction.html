@@ -74,23 +74,22 @@
                         </div>
                     </div>
                     
-                    <div class="detail">
+                    <!-- the change that I made below is, I made the whole div clickable (sadly it shows an error in this editor)-->
+
+                    <div class="detail" onclick='location.href="{% url 'aucCarDetail' car.id %}";' style="cursor: pointer;">
                         <h1 class="title">
-                            <a href="{% url 'aucCarDetail' car.id %}">{{car.car_title}}</a>
+                            <span>{{car.car_title}}</span>
+                            <p style="float: right;">({{car.body_style}})</p>
                         </h1>
                         <div class="location">
-                            <a href="{% url 'aucCarDetail' car.id %}">
+                            <p>
                                 <i class="flaticon-pin"></i>{{car.state}}, {{car.city}}
-                            </a>
+                            </p>
                         </div>
                     </div>
 
                     <div class="footer clearfix">
-                        <div class="pull-left ratings days">
-                            <p class="cartype">{{car.body_style}}</p>
-                        </div>
-
-                        <div class="pull-right">
+                        <div class="pull-left days">
                             <p>Starting Bid: <span class="price">Rs. {{car.price | intcomma}}</span></p>
                         </div>
                     </div>

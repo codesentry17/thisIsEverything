@@ -162,14 +162,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="detail">
+
+                        <!-- the change that I did below is that I made the whole div clickable (sadly it shows an error in this editor)-->
+
+                        <div class="detail" onclick='location.href="{% url 'car_detail' car.id %}";' style="cursor: pointer;">
                             <h1 class="title">
-                                <a href="{% url 'car_detail' car.id %}">{{ car.car_title }}</a>
+                                <p>{{ car.car_title }}</p>
                             </h1>
                             <div class="location">
-                                <a href="{% url 'car_detail' car.id %}">
+                                <p>
                                     <i class="flaticon-pin"></i>{{car.state}}, {{car.city}}
-                                </a>
+                                </p>
                             </div>
                             <ul class="facilities-list clearfix">
                                 <li>{{car.fuel_type}}</li>
@@ -260,14 +263,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="detail">
+                    
+                    <!-- the change that I made below is, I made the whole div clickable (sadly it shows an error in this editor)-->
+
+                    <div class="detail" onclick='location.href="{% url 'car_detail' car.id %}";' style="cursor: pointer;">
                         <h1 class="title">
-                            <a href="{% url 'car_detail' car.id %}">{{car.car_title}}</a>
+                            <p>{{car.car_title}}</p>
                         </h1>
                         <div class="location">
-                            <a href="{% url 'car_detail' car.id %}">
+                            <p>
                                 <i class="flaticon-pin"></i>{{car.state}}, {{car.city}}
-                            </a>
+                            </p>
                         </div>
                     </div>
                     <div class="footer clearfix">
