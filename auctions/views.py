@@ -62,3 +62,8 @@ def aucInquiry(request):
     messages.success(request, 'Your bidding request has been submitted')
     return redirect('/auctions/'+car_id)
     
+
+def aucSearch(request):
+    keyword = request.GET['keyword']
+    cars = Auction.objects.order_by('-created_date').filter(car_title__icontains=keyword)
+    return render(request, 'auctions/auction.html',{'aucCars': cars})
