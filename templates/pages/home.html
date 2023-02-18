@@ -167,7 +167,7 @@
 
                         <div class="detail" onclick='location.href="{% url 'car_detail' car.id %}";' style="cursor: pointer;">
                             <h1 class="title">
-                                <p>{{ car.car_title }}</p>
+                                <b>{{ car.car_title }}</b>
                             </h1>
                             <div class="location">
                                 <p>
@@ -268,7 +268,7 @@
 
                     <div class="detail" onclick='location.href="{% url 'car_detail' car.id %}";' style="cursor: pointer;">
                         <h1 class="title">
-                            <p>{{car.car_title}}</p>
+                            <b>{{car.car_title}}</b>
                         </h1>
                         <div class="location">
                             <p>
@@ -319,7 +319,7 @@
                             </div>
                         </div>
                         <div class="details">
-                            <h4><a href="#">{{team.first_name}} {{team.last_name}}</a></h4>
+                            <h4><b>{{team.first_name}} {{team.last_name}}</b></h4>
                             <h5>{{team.designation}}</h5>
                         </div>
                     </div>
