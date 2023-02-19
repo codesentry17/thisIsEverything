@@ -6,6 +6,7 @@
 {% load humanize %}
 {% load static %}
 
+
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
     <div class="container breadcrumb-area">
@@ -19,6 +20,7 @@
     </div>
 </div>
 <!-- Sub Banner end -->
+
 
 <!-- Rent car start -->
 <div class="featured-car content-area">
@@ -76,7 +78,11 @@
                     
                     <!-- the change that I made below is, I made the whole div clickable (sadly it shows an error in this editor)-->
 
-                    <div class="detail" onclick='location.href="{% url 'aucCarDetail' car.id %}";' style="cursor: pointer;">
+                    <div 
+                        class="detail" 
+                        onclick='location.href="{% url 'aucCarDetail' car.id %}";' 
+                        style="cursor: pointer;">
+
                         <h1 class="title">
                             <b>{{car.car_title}}</b>
                             <p style="float: right;">({{car.body_style}})</p>
@@ -101,6 +107,5 @@
     </div>
 </div>
 <!-- Rent car end -->
-
 
 {% endblock %}

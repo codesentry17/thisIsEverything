@@ -152,7 +152,13 @@
                     <!-- Advanced search start -->
                     <div class="widget advanced-search d-none-992">
                         <button class="btn btn-outline-danger bomd btn-block btn-lg" data-toggle="modal"
-                            data-target="#inquiryModal">Make Bid</button>
+                            {% if user.is_authenticated %}
+                            data-target="#inquiryModal"
+                            {% else %}
+                            type="submit"
+                            onclick='location.href="{% url 'login' %}"'
+                            {% endif %}>Make Bid
+                        </button>
 
 
                         <br>

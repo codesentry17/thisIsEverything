@@ -64,7 +64,7 @@
                         {% endif %}
                          href="{% url 'contact' %}">Contact</a>
                     </li>
-                    {% if user.is_authenticated %}
+
                     <li class="nav-item dropdown">
                         <a
                         {% if 'auction' in request.path %}
@@ -74,7 +74,7 @@
                         {% endif %}
                          href="{% url 'auction' %}">Auctions</a>
                     </li>
-                    {% endif %}
+
                     <li class="nav-item dropdown m-hide">
                         <a href="#full-page-search" class="nav-link h-icon">
                             <i class="fa fa-search"></i>
