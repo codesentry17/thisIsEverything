@@ -17,7 +17,13 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You are now logged in.')
-            return redirect('dashboard')
+
+            # redirecting to previous page after logging in
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
+            
+            else:
+                return redirect('dashboard')
         else:
             messages.error(request, 'Invalid login credentials')
             return redirect('login')
