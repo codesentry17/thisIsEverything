@@ -49,12 +49,13 @@ def aucInquiry(request):
         first_name=first_name, last_name=last_name, email=email, phone=phone, bid=bid, message=message)
     
     admin_info = User.objects.get(is_superuser=True)
+    admin_email = admin_info.email
     
     send_mail(
             'New Car Bid',  #title
             'You have a new bidding for the car ' + car_title + '. Please login to your admin panel for more info.',    #subject
             '', #from (fixed in settings)
-            ['1010throwaway0101@gmail.com'],    #to
+            [admin_email],    #to
             fail_silently=False,
             )
     
