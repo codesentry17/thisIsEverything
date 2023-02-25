@@ -36,12 +36,13 @@
                             </h6>
                         </div>
                         <div class="pull-right">
-                            <h3><span>Min Bid: Rs. {{single_car.price | intcomma}}</span></h3>
+                            <h3>Min Bid: <span style="color: #f0151f;"><b>Rs. {{single_car.price | intcomma}}</b></span></h3>
                         </div>
                     </div>
                     <div id="carDetailsSlider" class="carousel car-details-sliders slide mb-40">
                         <!-- main slider carousel items -->
                         <div class="carousel-inner">
+                            <div class="tag">{{single_car.sell_date|timeuntil}} left</div>
                             <div class="active item carousel-item" data-slide-number="0">
                                 <img src="{{single_car.car_photo.url}}" class="img-fluid" alt="slider-car">
                             </div>

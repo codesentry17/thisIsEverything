@@ -114,6 +114,7 @@ class Auction(models.Model):
     milage = models.IntegerField()
     fuel_type = models.CharField(max_length=50)
     no_of_owners = models.CharField(max_length=100)
+    sell_date = models.DateField(default=datetime.now)
     created_date = models.DateTimeField(default=datetime.now, blank=True)
     
     def __str__(self):

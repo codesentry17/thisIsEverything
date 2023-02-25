@@ -26,12 +26,19 @@
 <div class="featured-car content-area">
     <div class="container">
         <!-- Main title -->
+
+        <div class="main-title text-center">
+            <h1>Our <span>Sealed-Bid Auction</span> Page</h1>
+            <h4>Place your bid and hope for the best</h4>
+        </div>
+
         <div class="row">
           {% for car in aucCars %}
             <div class="col-lg-4 col-md-6">
                 <div class="car-box">
                     <div class="car-thumbnail">
                         <a href="{% url 'car_detail' car.id %}" class="car-img">
+                            <div class="tag">{{car.sell_date|timeuntil}} left</div>
                             <img class="d-block w-100" src="{{car.car_photo.url}}" alt="car" style="min-height: 262px; max-height: 262px;">
                             <div class="facilities-list clearfix">
                                 <ul>
