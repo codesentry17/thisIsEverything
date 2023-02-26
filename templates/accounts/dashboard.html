@@ -25,16 +25,23 @@
 
 <div class="container mt-50 mb-50">
   {% include 'includes/messages.html' %}
-  <div class="main-title" style="text-align:left !important;">
+  <div class="main-title" style="text-align:left important;">
     <h1>Welcome <span>{{user.first_name}}</span></h1>
-    <br><br>
-    <h3>Here are the cars that you have inquired for</h3>
   </div>
+
+
+  {% if inquiries1 or inquiries2 %}
   {% if inquiries1 %}
+  <div class="main-title" style="text-align:left important;">
+    <br><br>
+    <h3>Inquiry for Cars</h3>
+  </div>
   <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">Car Name</th>
+        <th scope="col">Inquiry Date</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -42,6 +49,8 @@
       {% for inquiry in inquiries1 %}
       <tr onclick='location.href="{% url 'car_detail' inquiry.car_id %}";' style="cursor: pointer;">
         <td>{{inquiry.car_title}}</td>
+        <td>{{inquiry.create_date.date}}</td>
+        <td><a href="#" class="btn btn-outline-dark" onclick="event.stopPropagation();">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>
@@ -49,15 +58,17 @@
   {% endif %}
 
   {% if inquiries2 %}
-  <div class="main-title" style="text-align:left !important;">
+  <div class="main-title" style="text-align:left important;">
     <br><br>
-    <h3>Here are the cars that you have bid for</h3>
+    <h3>Auction Bids for Cars</h3>
   </div>
   <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">Car Name</th>
         <th scope="col">Your Bid</th>
+        <th scope="col">Bid Date</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -66,10 +77,17 @@
       <tr onclick='location.href="{% url 'aucCarDetail' inquiry.car_id %}";' style="cursor: pointer;">
         <td>{{inquiry.car_title}}</td>
         <td>Rs. {{ inquiry.bid | intcomma }}</td>
+        <td>{{inquiry.create_date.date}}</td>
+        <td><a href="#" class="btn btn-outline-dark" onclick="event.stopPropagation();">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  {% endif %}
+  {% else %}
+  <div class="main-title" style="text-align:left important;">
+    <h1>No actions performed</h1>
+  </div>
   {% endif %}
 
 </div>
