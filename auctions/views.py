@@ -12,6 +12,7 @@ def auction(request):
     cars = Auction.objects.order_by('-created_date')
     data={
         'aucCars': cars,
+        'today':datetime.now().date(),
     }
     return render(request, 'auctions/auction.html',data)
 
@@ -68,4 +69,4 @@ def aucInquiry(request):
 def aucSearch(request):
     keyword = request.GET['keyword']
     cars = Auction.objects.order_by('-created_date').filter(car_title__icontains=keyword)
-    return render(request, 'auctions/auction.html',{'aucCars': cars})
+    return render(request, 'auctions/auction.html',{'aucCars': cars, 'today':datetime.now().date()})

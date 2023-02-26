@@ -3,6 +3,9 @@
 {% block title %} | Dashboard {% endblock %}
 {% block content %}
 
+{% load humanize %}
+
+
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
   <div class="container breadcrumb-area">
@@ -25,49 +28,44 @@
   <div class="main-title" style="text-align:left !important;">
     <h1>Welcome <span>{{user.first_name}}</span></h1>
     <br><br>
-    <h3>Here are the cars that you have inquired about</h3>
+    <h3>Here are the cars that you have inquired for</h3>
   </div>
   {% if inquiries1 %}
   <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">Car Name</th>
-        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
 
       {% for inquiry in inquiries1 %}
-      <tr>
-        <!-- <th scope="row">{{ forloop.counter }}</th> -->
+      <tr onclick='location.href="{% url 'car_detail' inquiry.car_id %}";' style="cursor: pointer;">
         <td>{{inquiry.car_title}}</td>
-        <td><a href="{% url 'car_detail' inquiry.car_id %}" class="btn btn-outline-dark">View Car</a></td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
   {% endif %}
 
+  {% if inquiries2 %}
   <div class="main-title" style="text-align:left !important;">
     <br><br>
     <h3>Here are the cars that you have bid for</h3>
   </div>
-  {% if inquiries2 %}
   <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">Car Name</th>
         <th scope="col">Your Bid</th>
-        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
 
       {% for inquiry in inquiries2 %}
-      <tr>
+      <tr onclick='location.href="{% url 'aucCarDetail' inquiry.car_id %}";' style="cursor: pointer;">
         <td>{{inquiry.car_title}}</td>
-        <td>{{inquiry.bid}}</td>
-        <td><a href="{% url 'aucCarDetail' inquiry.car_id %}" class="btn btn-outline-dark">View Car</a></td>
+        <td>Rs. {{ inquiry.bid | intcomma }}</td>
       </tr>
       {% endfor %}
     </tbody>
