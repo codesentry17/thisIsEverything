@@ -6,5 +6,6 @@ urlpatterns = [
     path('<int:id>', views.aucCarDetail, name='aucCarDetail'),
     path('aucInquiry',views.aucInquiry,name='aucInquiry'),
     path('search', views.aucSearch, name='aucSearch'),
+    path('delete/<int:id>',views.delAucInq,name='delAucInq'),
 ]
  

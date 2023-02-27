@@ -22,4 +22,16 @@ class AuctionContact(admin.ModelAdmin):
     search_fields = ('first_name', 'last_name', 'email', 'car_title')
     list_per_page = 25
 
+    readonly_fields=[
+        'first_name',
+        'last_name',
+        'car_id',
+        'car_title',
+        'email',
+        'phone',
+        'bid',
+        'message',
+        'user_id',
+        'create_date',]
+
 admin.site.register(aucContacts, AuctionContact)

@@ -41,7 +41,15 @@ def inquiry(request):
                 [admin_email],    #to
                 fail_silently=False,
             )
+        print(admin_email)
 
         contact.save()
         messages.success(request, 'Your request has been submitted, we will get back to you shortly.')
         return redirect('/cars/'+car_id)
+
+
+def delCarInq(request,id):
+    contact = Contact.objects.get(id=id)
+    contact.delete()
+    messages.success(request,'You have deleted your Car Inquiry')
+    return redirect('dashboard')

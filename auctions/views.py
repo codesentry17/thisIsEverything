@@ -70,3 +70,9 @@ def aucSearch(request):
     keyword = request.GET['keyword']
     cars = Auction.objects.order_by('-created_date').filter(car_title__icontains=keyword)
     return render(request, 'auctions/auction.html',{'aucCars': cars, 'today':datetime.now().date()})
+
+def delAucInq(request,id):
+    contact = aucContacts.objects.get(id=id)
+    contact.delete()
+    messages.success(request,'You have deleted your Auction Bid')
+    return redirect('dashboard')

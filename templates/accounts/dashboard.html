@@ -32,9 +32,9 @@
 
   {% if inquiries1 or inquiries2 %}
   {% if inquiries1 %}
-  <div class="main-title" style="text-align:left important;">
+  <div class="main-title" style="text-align:left">
     <br><br>
-    <h3>Inquiry for Cars</h3>
+    <h2>Inquiry for Cars</h2>
   </div>
   <table class="table table-hover">
     <thead>
@@ -50,7 +50,7 @@
       <tr onclick='location.href="{% url 'car_detail' inquiry.car_id %}";' style="cursor: pointer;">
         <td>{{inquiry.car_title}}</td>
         <td>{{inquiry.create_date.date}}</td>
-        <td><a href="#" class="btn btn-outline-dark" onclick="event.stopPropagation();">Delete</a></td>
+        <td><a href="{% url 'delCarInq' inquiry.id %}" class="btn btn-outline-dark" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this inquiry?');">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>
@@ -58,9 +58,9 @@
   {% endif %}
 
   {% if inquiries2 %}
-  <div class="main-title" style="text-align:left important;">
+  <div class="main-title" style="text-align:left;">
     <br><br>
-    <h3>Auction Bids for Cars</h3>
+    <h2>Auction Bids for Cars</h2>
   </div>
   <table class="table table-hover">
     <thead>
@@ -78,7 +78,7 @@
         <td>{{inquiry.car_title}}</td>
         <td>Rs. {{ inquiry.bid | intcomma }}</td>
         <td>{{inquiry.create_date.date}}</td>
-        <td><a href="#" class="btn btn-outline-dark" onclick="event.stopPropagation();">Delete</a></td>
+        <td><a href="{% url 'delAucInq' inquiry.id %}" class="btn btn-outline-dark" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this bid?');">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>

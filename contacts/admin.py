@@ -8,4 +8,19 @@ class ContactAdmin(admin.ModelAdmin):
     search_fields = ('first_name', 'last_name', 'email', 'car_title')
     list_per_page = 25
 
+    readonly_fields=[
+        'first_name',
+        'last_name',
+        'car_id',
+        'customer_need',
+        'car_title',
+        'city',
+        'state',
+        'email',
+        'phone',
+        'message',
+        'user_id',
+        'create_date',
+    ]
+
 admin.site.register(Contact, ContactAdmin)
