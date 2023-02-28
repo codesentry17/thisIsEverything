@@ -115,6 +115,7 @@ class Car(models.Model):
     fuel_type = models.CharField(max_length=50)
     no_of_owners = models.CharField(max_length=100)
     is_featured = models.BooleanField(default=False)
+    sold = models.BooleanField(default=False)
     created_date = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):

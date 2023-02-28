@@ -38,7 +38,7 @@ def inquiry(request):
                 'New Car Inquiry',  #title
                 'You have a new inquiry for the car ' + car_title + '. Please login to your admin panel for more info.',    #subject
                 '', #from (fixed in settings)
-                [admin_email],    #to
+                [],    #to
                 fail_silently=False,
             )
         print(admin_email)

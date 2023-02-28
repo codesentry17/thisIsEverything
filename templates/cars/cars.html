@@ -27,13 +27,11 @@
 
                 <div class="row">
                   {% for car in cars %}
+                  {% if not car.sold %}
                     <div class="col-lg-6 col-md-6">
                         <div class="car-box-3">
                             <div class="car-thumbnail">
                                 <a href="{% url 'car_detail' car.id %}" class="car-img">
-                                    {% if car.is_featured %}
-                                    <div class="tag-2">Featured</div>
-                                    {% endif %}
                                     <div class="price-box">
                                         <span>Rs. {{car.price | intcomma }}</span>
                                     </div>
@@ -95,7 +93,8 @@
                             </div>
                         </div>
                     </div>
-            {% endfor %}
+                    {% endif %}
+                    {% endfor %}
 
 
 
@@ -139,10 +138,10 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
-                <div class="sidebar-right">
+                <div class="sticky-div">
                     <!-- Advanced search start -->
                     <div class="widget advanced-search2">
-                        <h3 class="sidebar-title">Search your desire car</h3>
+                        <h3 class="sidebar-title">Search your desired car</h3>
                         <form action="{% url 'search' %}" method="">
                             <div class="form-group">
                                 <input type="text" name="keyword" placeholder="Search by name" class="form-control">
