@@ -27,9 +27,15 @@
             <div class="col-lg-8 col-md-12 col-xs-12">
                 <div class="car-details-section">
                     <!-- Heading start -->
+                    {% if single_car.sold %}
+                    <div class="heading-car clearfix">
+                        <h1 style="text-align: center; color: red;" ><b>THIS CAR IS SOLD OUT</b></h1>
+                    </div>
+                    {% endif %}
+                    <br><br>
                     <div class="heading-car clearfix">
                       {% include 'includes/messages.html' %}
-                        <div class="pull-left">
+                      <div class="pull-left">
                             <h3>{{single_car.car_title}}</h3>
                             <h6>
                                 <i class="flaticon-pin"></i>{{single_car.state}}, {{single_car.city}}
@@ -155,11 +161,12 @@
                 <div class="sidebar-right">
                     <!-- Advanced search start -->
                     <div class="widget advanced-search d-none-992">
+                        {% if not single_car.sold %}
                         <button class="btn btn-outline-danger bomd btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Send message</button>
 
-
                         <br>
-                        <h3 class="sidebar-title">Refine Your Search</h3>
+                        {% endif %}
+                        <h3 class="sidebar-title">Specifications</h3>
                         <ul>
                             <li>
                                 <span>Color: </span>{{single_car.color}}

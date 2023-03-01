@@ -8,23 +8,6 @@ from .models import Auction, aucContacts
 
 # Create your views here.
 
-def auction(request):
-    cars = Auction.objects.order_by('-created_date')
-    data={
-        'aucCars': cars,
-        'today':datetime.now().date(),
-    }
-    return render(request, 'auctions/auction.html',data)
-
-def aucCarDetail(request, id):
-    single_car = get_object_or_404(Auction, pk=id)
-
-    data = {
-        'single_car': single_car,
-    }
-    return render(request, 'auctions/aucCarDetail.html',data)
-
-
 def aucInquiry(request):
     if request.method == 'POST':
         car_id = request.POST['car_id']
@@ -64,11 +47,27 @@ def aucInquiry(request):
     contact.save()
     messages.success(request, 'Your bidding request has been submitted')
     return redirect('/auctions/'+car_id)
+
+def auction(request):
+    cars = Auction.objects.order_by('-created_date').filter(sold=False)
+    data={
+        'aucCars': cars,
+        'today':datetime.now().date(),
+    }
+    return render(request, 'auctions/auction.html',data)
+
+def aucCarDetail(request, id):
+    single_car = get_object_or_404(Auction, pk=id)
+
+    data = {
+        'single_car': single_car,
+    }
+    return render(request, 'auctions/aucCarDetail.html',data)
     
 
 def aucSearch(request):
     keyword = request.GET['keyword']
-    cars = Auction.objects.order_by('-created_date').filter(car_title__icontains=keyword)
+    cars = Auction.objects.order_by('-created_date').filter(sold=False,car_title__icontains=keyword)
     return render(request, 'auctions/auction.html',{'aucCars': cars, 'today':datetime.now().date()})
 
 def delAucInq(request,id):

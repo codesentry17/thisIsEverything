@@ -27,7 +27,6 @@
 
                 <div class="row">
                   {% for car in cars %}
-                  {% if not car.sold %}
                     <div class="col-lg-6 col-md-6">
                         <div class="car-box-3">
                             <div class="car-thumbnail">
@@ -93,7 +92,6 @@
                             </div>
                         </div>
                     </div>
-                    {% endif %}
                     {% endfor %}
 
 
@@ -138,10 +136,9 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-12">
-                <div class="sticky-div">
+                <div style="position: sticky; top: 120px;">
                     <!-- Advanced search start -->
-                    <div class="widget advanced-search2">
-                        <h3 class="sidebar-title">Search your desired car</h3>
+                    <div class="widget advanced-search2" style="padding-top: 0px;">
                         <form action="{% url 'search' %}" method="">
                             <div class="form-group">
                                 <input type="text" name="keyword" placeholder="Search by name" class="form-control">
@@ -193,7 +190,7 @@
                     </div>
 
                     <!-- Question start -->
-                    <div class="widget question widget-3">
+                    <div class="widget question widget-3" style="padding-top: 0px;">
                         <h5 class="sidebar-title">Follow us</h5>
                         <div class="social-list clearfix">
                             <ul>
