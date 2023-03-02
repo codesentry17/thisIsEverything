@@ -68,7 +68,7 @@ def aucCarDetail(request, id):
 def aucSearch(request):
     keyword = request.GET['keyword']
     cars = Auction.objects.order_by('-created_date').filter(sold=False,car_title__icontains=keyword)
-    return render(request, 'auctions/auction.html',{'aucCars': cars, 'today':datetime.now().date()})
+    return render(request, 'auctions/aucSearch.html',{'aucCars': cars, 'today':datetime.now().date()})
 
 def delAucInq(request,id):
     contact = aucContacts.objects.get(id=id)

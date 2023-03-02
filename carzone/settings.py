@@ -163,8 +163,8 @@ SITE_ID = 1
 # Email sending
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'fordjangoproj@gmail.com'
-EMAIL_HOST_PASSWORD = 'jnubmggmlymhavkz'
+EMAIL_HOST_USER = 'fordjangoproj2@gmail.com'
+EMAIL_HOST_PASSWORD = 'injttfwcpdnnsckh'
 EMAIL_USE_TLS = True
 
 

@@ -4,6 +4,15 @@ from .models import Car
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
+
+def car_detail(request, id):
+    single_car = get_object_or_404(Car, pk=id)
+    data = {
+        'single_car': single_car,
+    }
+    return render(request, 'cars/car_detail.html', data)
+
+
 def cars(request):
     cars = Car.objects.order_by('-created_date').filter(sold=False)
     paginator = Paginator(cars, 6)
@@ -12,6 +21,7 @@ def cars(request):
 
     model_search = Car.objects.filter(sold=False).values_list('model', flat=True).distinct()
     city_search = Car.objects.filter(sold=False).values_list('city', flat=True).distinct()
+    color_search = Car.objects.filter(sold=False).values_list('color', flat=True).distinct()
     year_search = [x for x in range(2010,datetime.now().year)]
     body_style_search = Car.objects.filter(sold=False).values_list('body_style', flat=True).distinct()
 
@@ -21,26 +31,13 @@ def cars(request):
         'city_search': sorted(city_search),
         'year_search': year_search,
         'body_style_search': body_style_search,
+        'color_search': sorted(color_search),
     }
     return render(request, 'cars/cars.html', data)
-
-def car_detail(request, id):
-    single_car = get_object_or_404(Car, pk=id)
-
-    data = {
-        'single_car': single_car,
-    }
-    return render(request, 'cars/car_detail.html', data)
 
 
 def search(request):
     cars = Car.objects.order_by('-created_date').filter(sold=False)
-
-    model_search = Car.objects.filter(sold=False).values_list('model', flat=True).distinct()
-    city_search = Car.objects.filter(sold=False).values_list('city', flat=True).distinct()
-    year_search = [x for x in range(2010,datetime.now().year)]
-    body_style_search = Car.objects.filter(sold=False).values_list('body_style', flat=True).distinct()
-    transmission_search = Car.objects.filter(sold=False).values_list('transmission', flat=True).distinct()
 
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
@@ -62,6 +59,11 @@ def search(request):
         if year:
             cars = cars.filter(year__iexact=year)
 
+    if 'color' in request.GET:
+        color = request.GET['color']
+        if color:
+            cars = cars.filter(color__iexact=color)
+
     if 'body_style' in request.GET:
         body_style = request.GET['body_style']
         if body_style:
@@ -75,11 +77,7 @@ def search(request):
 
     data = {
         'cars': cars,
-        'model_search': model_search,
-        'city_search': city_search,
-        'year_search': sorted(year_search),
-        'body_style_search': body_style_search,
-        'transmission_search': transmission_search,
+        
     }
     return render(request, 'cars/search.html', data)
 

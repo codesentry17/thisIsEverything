@@ -9765,6 +9765,8 @@ a.nav-link.active{
 }
 
 .buttonX{
+    color: red;
+    font-weight: bold;
     text-align: center;
     margin: 10px auto;
     padding: 5px;
@@ -9772,7 +9774,7 @@ a.nav-link.active{
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 3px;
-    border: 1px solid gray;
+    border: 1px solid red;
 }
 .buttonX:hover{
     background-color: #f44336;
