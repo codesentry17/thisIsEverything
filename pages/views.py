@@ -1,26 +1,37 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from .models import Team
 from cars.models import Car
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 def home(request):
     teams = Team.objects.all()
-    featured_cars = Car.objects.order_by('-created_date').filter(is_featured=True)
-    all_cars = Car.objects.order_by('-created_date')
-    model_search = Car.objects.values_list('model', flat=True).distinct()
-    city_search = Car.objects.values_list('city', flat=True).distinct()
-    year_search = Car.objects.values_list('year', flat=True).distinct()
-    body_style_search = Car.objects.values_list('body_style', flat=True).distinct()
+
+    """Starting the paginating Shit"""
+
+    featured_cars = Car.objects.order_by('-created_date').filter(sold=False,is_featured=True)
+
+    all_cars = Car.objects.order_by('-created_date').filter(sold=False)
+    paginator = Paginator(all_cars,6)
+    page = request.GET.get('page')
+    all_cars = paginator.get_page(page)
+
+
+    model_search = Car.objects.filter(sold=False).values_list('model', flat=True).distinct()
+    city_search = Car.objects.filter(sold=False).values_list('city', flat=True).distinct()
+    year_search = [x for x in range(2010,datetime.now().year)]
+    body_style_search = Car.objects.filter(sold=False).values_list('body_style', flat=True).distinct()
     data = {
         'teams': teams,
         'featured_cars': featured_cars,
         'all_cars': all_cars,
-        'model_search': model_search,
-        'city_search': city_search,
+        'model_search': sorted(model_search),
+        'city_search': sorted(city_search),
         'year_search': year_search,
         'body_style_search': body_style_search,
     }

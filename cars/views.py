@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from .models import Car
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -11,13 +12,13 @@ def cars(request):
 
     model_search = Car.objects.filter(sold=False).values_list('model', flat=True).distinct()
     city_search = Car.objects.filter(sold=False).values_list('city', flat=True).distinct()
-    year_search = Car.objects.filter(sold=False).values_list('year', flat=True).distinct()
+    year_search = [x for x in range(2010,datetime.now().year)]
     body_style_search = Car.objects.filter(sold=False).values_list('body_style', flat=True).distinct()
 
     data = {
         'cars': paged_cars,
-        'model_search': model_search,
-        'city_search': city_search,
+        'model_search': sorted(model_search),
+        'city_search': sorted(city_search),
         'year_search': year_search,
         'body_style_search': body_style_search,
     }
@@ -37,7 +38,7 @@ def search(request):
 
     model_search = Car.objects.filter(sold=False).values_list('model', flat=True).distinct()
     city_search = Car.objects.filter(sold=False).values_list('city', flat=True).distinct()
-    year_search = Car.objects.filter(sold=False).values_list('year', flat=True).distinct()
+    year_search = [x for x in range(2010,datetime.now().year)]
     body_style_search = Car.objects.filter(sold=False).values_list('body_style', flat=True).distinct()
     transmission_search = Car.objects.filter(sold=False).values_list('transmission', flat=True).distinct()
 
@@ -76,7 +77,7 @@ def search(request):
         'cars': cars,
         'model_search': model_search,
         'city_search': city_search,
-        'year_search': year_search,
+        'year_search': sorted(year_search),
         'body_style_search': body_style_search,
         'transmission_search': transmission_search,
     }

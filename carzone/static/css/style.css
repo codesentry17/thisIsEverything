@@ -9763,3 +9763,18 @@ a.nav-link.active{
 .tabbing-box .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
   color: #fff !important;
 }
+
+.buttonX{
+    text-align: center;
+    margin: 10px auto;
+    padding: 5px;
+    width: 15%;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid gray;
+}
+.buttonX:hover{
+    background-color: #f44336;
+    color: white;
+}

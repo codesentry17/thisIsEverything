@@ -72,6 +72,7 @@ def aucSearch(request):
 
 def delAucInq(request,id):
     contact = aucContacts.objects.get(id=id)
+    carName = contact.car_title
+    messages.success(request,'You have deleted your Auction Bid for {}'.format(carName))
     contact.delete()
-    messages.success(request,'You have deleted your Auction Bid')
     return redirect('dashboard')

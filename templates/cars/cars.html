@@ -19,15 +19,14 @@
 <!-- Sub Banner end -->
 
 
-<!-- Featured car start -->
+<!-- car start -->
 <div class="featured-car content-area">
-    <div class="container">
+    <div class="container-fluid" style="padding-left: 20px;">
         <div class="row">
-            <div class="col-lg-8 col-md-12">
-
+            <div class="col-lg-9 col-md-12">
                 <div class="row">
                   {% for car in cars %}
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <div class="car-box-3">
                             <div class="car-thumbnail">
                                 <a href="{% url 'car_detail' car.id %}" class="car-img">
@@ -93,9 +92,6 @@
                         </div>
                     </div>
                     {% endfor %}
-
-
-
                 </div>
                 <!-- Page navigation start -->
                 <div class="pagination-box p-box-2 text-center">
@@ -135,7 +131,7 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-12">
+            <div class="col-lg-3 col-md-12" style="padding-left: 0px;">
                 <div style="position: sticky; top: 120px;">
                     <!-- Advanced search start -->
                     <div class="widget advanced-search2" style="padding-top: 0px;">
@@ -145,34 +141,34 @@
                             </div>
 
                             <div class="form-group">
-                                <select class="form-control search-fields" name="model">
-                                    <option selected="true" disabled="disabled">Model</option>
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="model">
+                                    <option selected="true" disabled="disabled" style="text-align: center;">Model</option>
                                     {% for model in model_search %}
-                                      <option value="{{model}}">{{model}}</option>
+                                      <option value="{{model}}" style="text-align: center;">{{model}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control search-fields" name="city">
-                                    <option selected="true" disabled="disabled">Location</option>
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="city">
+                                    <option selected="true" disabled="disabled" style="text-align: center;">Location</option>
                                     {% for city in city_search %}
-                                      <option value="{{city}}">{{city}}</option>
+                                      <option value="{{city}}" style="text-align: center;">{{city}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control search-fields" name="year">
-                                    <option selected="true" disabled="disabled">Year</option>
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="year">
+                                    <option selected="true" disabled="disabled" style="text-align: center;">Year</option>
                                     {% for year in year_search %}
-                                      <option value="{{year}}">{{year}}</option>
+                                      <option value="{{year}}" style="text-align: center;">{{year}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control search-fields" name="body_style">
-                                    <option selected="true" disabled="disabled">Select Type Of Car</option>
+                                <select class="form-control search-fields" onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="body_style">
+                                    <option selected="true" disabled="disabled" style="text-align: center;">Select Type Of Car</option>
                                     {% for body_style in body_style_search %}
-                                      <option value="{{body_style}}">{{body_style}}</option>
+                                      <option value="{{body_style}}" style="text-align: center;">{{body_style}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -182,31 +178,15 @@
                                             <div class="clearfix"></div>
                                         </div>
                             <div class="form-group">
-                                <button class="btn btn-block button-theme btn-md">
-                                    <i class="fa fa-search"></i> Search
-                                </button>
+                                <button class="btn btn-block button-theme btn-md"><i class="fa fa-search"></i> Search</button>
                             </div>
                         </form>
-                    </div>
-
-                    <!-- Question start -->
-                    <div class="widget question widget-3" style="padding-top: 0px;">
-                        <h5 class="sidebar-title">Follow us</h5>
-                        <div class="social-list clearfix">
-                            <ul>
-                                <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="google-bg"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
-                                <li><a href="#" class="linkedin-bg"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Featured car end -->
+<!-- car end -->
 
 {% endblock %}

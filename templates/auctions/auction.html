@@ -34,6 +34,7 @@
 
         <div class="row">
           {% for car in aucCars %}
+          {% if today < car.sell_date %}
             <div class="col-lg-4 col-md-6">
                 <div class="car-box">
                     <div class="car-thumbnail">
@@ -108,6 +109,7 @@
                     </div>
                 </div>
             </div>
+          {% endif %}
           {% endfor %}
 
         </div>

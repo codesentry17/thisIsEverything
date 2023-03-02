@@ -26,30 +26,30 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="model">
-                                    <option selected='selected' disabled='disabled'>Select Model</option>
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="model">
+                                    <option selected='selected' disabled='disabled' style="text-align: center;">Select Model</option>
                                     {% for model in model_search %}
-                                      <option value="{{model}}">{{model}}</option>
+                                      <option value="{{model}}" style="text-align: center;">{{model}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="city">
-                                    <option selected='selected' disabled='disabled'>Select Location</option>
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="city">
+                                    <option selected='selected' disabled='disabled' style="text-align: center;">Select Location</option>
                                     {% for city in city_search %}
-                                      <option value="{{city}}">{{city}}</option>
+                                      <option value="{{city}}" style="text-align: center;">{{city}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="year">
-                                    <option selected='selected' disabled='disabled'>Select Year</option>
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="year">
+                                    <option selected='selected' disabled='disabled' style="text-align: center;">Select Year</option>
                                     {% for year in year_search %}
-                                      <option value="{{year}}">{{year}}</option>
+                                      <option value="{{year}}" style="text-align: center;">{{year}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -58,20 +58,20 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="body_style">
-                                    <option selected='selected' disabled='disabled'>Select Type Of Car</option>
+                                <select class="form-control search-fields" onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="body_style">
+                                    <option selected='selected' disabled='disabled' style="text-align: center;">Select Type Of Car</option>
                                     {% for body_style in body_style_search %}
-                                      <option value="{{body_style}}">{{body_style}}</option>
+                                      <option value="{{body_style}}" style="text-align: center;">{{body_style}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="transmission">
-                                    <option selected='selected' disabled='disabled'>Transmission</option>
+                                <select class="form-control search-fields" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="transmission">
+                                    <option selected='selected' disabled='disabled' style="text-align: center;">Transmission</option>
                                     {% for transmission in transmission_search %}
-                                      <option value="{{transmission}}">{{transmission}}</option>
+                                      <option value="{{transmission}}" style="text-align: center;">{{transmission}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -112,7 +112,6 @@
                 <div class="car-box">
                     <div class="car-thumbnail">
                         <a href="{% url 'car_detail' car.id %}" class="car-img">
-                            <div class="tag">For Sale</div>
                             <img class="d-block w-100" src="{{car.car_photo.url}}" alt="car" style="min-height: 262px; max-height: 262px;">
                             <div class="facilities-list clearfix">
                                 <ul>
@@ -161,14 +160,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="detail">
+                    <div class="detail" onclick='location.href="{% url 'car_detail' car.id %}";' style="cursor: pointer;">
                         <h1 class="title">
-                            <a href="{% url 'car_detail' car.id %}">{{car.car_title}}</a>
+                            {{car.car_title}}
                         </h1>
                         <div class="location">
-                            <a href="{% url 'car_detail' car.id %}">
-                                <i class="flaticon-pin"></i>{{car.state}}, {{car.city}}
-                            </a>
+                            <i class="flaticon-pin"></i>{{car.state}}, {{car.city}}
                         </div>
                     </div>
                     <div class="footer clearfix">
