@@ -61,6 +61,7 @@ def aucCarDetail(request, id):
 
     data = {
         'single_car': single_car,
+        'today': datetime.now().date(),
     }
     return render(request, 'auctions/aucCarDetail.html',data)
     

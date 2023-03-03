@@ -21,6 +21,7 @@ class AuctionContact(admin.ModelAdmin):
     list_display = ('id', 'first_name', 'last_name', 'email', 'car_title', 'bid', 'create_date')
     list_display_links = ('id', 'first_name', 'last_name')
     search_fields = ('first_name', 'last_name', 'email', 'car_title')
+    list_filter=('car_title',)
     list_per_page = 25
 
     readonly_fields=[
