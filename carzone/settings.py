@@ -164,7 +164,11 @@ SITE_ID = 1
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'fordjangoproj2@gmail.com'
-EMAIL_HOST_PASSWORD = 'tyazdromoudrpejx'
+<<<<<<< HEAD
+EMAIL_HOST_PASSWORD = ''
+=======
+EMAIL_HOST_PASSWORD = ''
+>>>>>>> 543070a8508c581a0d47e403121517e19dfe7bc8
 EMAIL_USE_TLS = True
 
 
