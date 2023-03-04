@@ -47,7 +47,7 @@ class Auction(models.Model):
     state = models.CharField(choices=state_choice, max_length=100)
     city = models.CharField(max_length=100)
     color = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
+    brand = models.CharField(max_length=100)
     year = models.IntegerField(('year'), choices=year_choice)
     condition = models.CharField(max_length=100)
     price = models.IntegerField()

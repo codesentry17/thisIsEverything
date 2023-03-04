@@ -77,7 +77,6 @@ def search(request):
 
     data = {
         'cars': cars,
-        
     }
     return render(request, 'cars/search.html', data)
 

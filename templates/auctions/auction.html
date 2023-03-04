@@ -24,7 +24,7 @@
 
 <!-- Rent car start -->
 <div class="featured-car content-area">
-    <div class="container">
+    <div class="container-fluid">
         <!-- Main title -->
 
         <div class="main-title text-center">
@@ -33,86 +33,154 @@
         </div>
 
         <div class="row">
-          {% for car in aucCars %}
-          {% if today < car.sell_date %}
-            <div class="col-lg-4 col-md-6">
-                <div class="car-box">
-                    <div class="car-thumbnail">
-                        <a href="{% url 'car_detail' car.id %}" class="car-img">
-                            <div class="tag">{{car.sell_date|timeuntil}} remaining</div>
-                            <img class="d-block w-100" src="{{car.car_photo.url}}" alt="car" style="min-height: 262px; max-height: 262px;">
-                            <div class="facilities-list clearfix">
-                                <ul>
-                                    <li>
-                                        <span><i class="flaticon-way"></i></span>{{car.miles | intcomma}} km
-                                    </li>
-                                    <li>
-                                        <span><i class="flaticon-calendar-1"></i></span>{{car.year}}
-                                    </li>
-                                    <li>
-                                        <span><i class="flaticon-manual-transmission"></i></span>{{car.transmission}}
-                                    </li>
-                                </ul>
-                            </div>
-                        </a>
-                        <div class="carbox-overlap-wrapper">
-                            <div class="overlap-box">
-                                <div class="overlap-btns-area">
-                                    <div class="car-magnify-gallery">
-                                        <a href="{{car.car_photo.url}}" class="overlap-btn">
-                                            <i class="fa fa-expand"></i>
-                                            <img class="hidden" src="{{car.car_photo.url}}">
-                                        </a>
-                                        {% if car.car_photo_1 %}
-                                        <a href="{{car.car_photo_1.url}}" class="hidden">
-                                            <img class="hidden" src="{{car.car_photo_1.url}}">
-                                        </a>
-                                        {% endif %}
-                                        {% if car.car_photo_2 %}
-                                        <a href="{{car.car_photo_2.url}}" class="hidden">
-                                            <img class="hidden" src="{{car.car_photo_2.url}}">
-                                        </a>
-                                        {% endif %}
-                                        {% if car.car_photo_3 %}
-                                        <a href="{{car.car_photo_3.url}}" class="hidden">
-                                            <img class="hidden" src="{{car.car_photo_3.url}}">
-                                        </a>
-                                        {% endif %}
+            <div class="col-lg-9 col-md-6">
+                <div class="row">
+                    {% for car in aucCars %}
+                    {% if today < car.sell_date %} 
+                    <div class="col-lg-4 col-md-6">
+                        <div class="car-box">
+                            <div class="car-thumbnail">
+                                <a href="{% url 'car_detail' car.id %}" class="car-img">
+                                    <div class="tag">{{car.sell_date|timeuntil}} remaining</div>
+                                    <img class="d-block w-100" src="{{car.car_photo.url}}" alt="car"
+                                        style="min-height: 262px; max-height: 262px;">
+                                    <div class="facilities-list clearfix">
+                                        <ul>
+                                            <li>
+                                                <span><i class="flaticon-way"></i></span>{{car.miles | intcomma}} km
+                                            </li>
+                                            <li>
+                                                <span><i class="flaticon-calendar-1"></i></span>{{car.year}}
+                                            </li>
+                                            <li>
+                                                <span><i
+                                                        class="flaticon-manual-transmission"></i></span>{{car.transmission}}
+                                            </li>
+                                        </ul>
                                     </div>
+                                </a>
+                                <div class="carbox-overlap-wrapper">
+                                    <div class="overlap-box">
+                                        <div class="overlap-btns-area">
+                                            <div class="car-magnify-gallery">
+                                                <a href="{{car.car_photo.url}}" class="overlap-btn">
+                                                    <i class="fa fa-expand"></i>
+                                                    <img class="hidden" src="{{car.car_photo.url}}">
+                                                </a>
+                                                {% if car.car_photo_1 %}
+                                                <a href="{{car.car_photo_1.url}}" class="hidden">
+                                                    <img class="hidden" src="{{car.car_photo_1.url}}">
+                                                </a>
+                                                {% endif %}
+                                                {% if car.car_photo_2 %}
+                                                <a href="{{car.car_photo_2.url}}" class="hidden">
+                                                    <img class="hidden" src="{{car.car_photo_2.url}}">
+                                                </a>
+                                                {% endif %}
+                                                {% if car.car_photo_3 %}
+                                                <a href="{{car.car_photo_3.url}}" class="hidden">
+                                                    <img class="hidden" src="{{car.car_photo_3.url}}">
+                                                </a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- the change that I made below is, I made the whole div clickable (sadly it shows an error in this editor)-->
+
+                            <div class="detail" onclick='location.href="{% url 'aucCarDetail' car.id %}";'
+                                style="cursor: pointer;">
+
+                                <h1 class="title">
+                                    <b>{{car.car_title}}</b>
+                                    <p style="float: right; text-transform: uppercase;"><b>{{car.body_style}}</b></p>
+                                </h1>
+                                <div class="location">
+                                    <p>
+                                        <i class="flaticon-pin"></i>{{car.state}}, {{car.city}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="footer clearfix">
+                                <div class="pull-left days">
+                                    <p><b>Starting Bid: </b><span class="price">Rs. {{car.price | intcomma}}</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- the change that I made below is, I made the whole div clickable (sadly it shows an error in this editor)-->
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div style="position: sticky; top: 120px;">
+                    <!-- Advanced search start -->
+                    <div class="widget advanced-search2" style="padding-top: 0px;">
+                        <form action="{% url 'aucSearch' %}" method="">
+                            <div class="form-group">
+                                <input type="text" name="keyword" placeholder="Search by name" class="form-control">
+                            </div>
 
-                    <div 
-                        class="detail" 
-                        onclick='location.href="{% url 'aucCarDetail' car.id %}";' 
-                        style="cursor: pointer;">
-
-                        <h1 class="title">
-                            <b>{{car.car_title}}</b>
-                            <p style="float: right; text-transform: uppercase;"><b>{{car.body_style}}</b></p>
-                        </h1>
-                        <div class="location">
-                            <p>
-                                <i class="flaticon-pin"></i>{{car.state}}, {{car.city}}
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="footer clearfix">
-                        <div class="pull-left days">
-                            <p><b>Starting Bid: </b><span class="price">Rs. {{car.price | intcomma}}</span></p>
-                        </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="brand">
+                                    <option selected="true" value="" style="text-align: center;">Brand</option>
+                                    {% for brand in brand_search %}
+                                      <option value="{{brand}}" style="text-align: center;">{{brand}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="city">
+                                    <option selected="true" value="" style="text-align: center;">Showroom</option>
+                                    {% for city in city_search %}
+                                      <option value="{{city}}" style="text-align: center;">{{city}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="year">
+                                    <option selected="true" value="" style="text-align: center;">Year</option>
+                                    {% for year in year_search %}
+                                      <option value="{{year}}" style="text-align: center;">{{year}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="color">
+                                    <option selected="true" value="" style="text-align: center;">Color</option>
+                                    {% for color in color_search %}
+                                      <option value="{{color}}" style="text-align: center;">{{color}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="body_style">
+                                    <option selected="true" value="" style="text-align: center;">Select Type Of Car</option>
+                                    {% for body_style in body_style_search %}
+                                      <option value="{{body_style}}" style="text-align: center;">{{body_style}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="range-slider clearfix">
+                                            <label>Price</label>
+                                            <div data-min="0" data-max="5000000"  data-min-name="min_price" data-max-name="max_price" data-unit="INR" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                            <div class="form-group">
+                                <button class="btn btn-block button-theme btn-md"><i class="fa fa-search"></i> Search</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-          {% endif %}
-          {% endfor %}
-
         </div>
+
+
+
+
     </div>
 </div>
 <!-- Rent car end -->
