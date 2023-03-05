@@ -27,10 +27,10 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="model">
-                                    <option selected='selected' disabled='disabled' style="text-align: center;">Select Model</option>
-                                    {% for model in model_search %}
-                                      <option value="{{model}}" style="text-align: center;">{{model}}</option>
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="brand">
+                                    <option selected='selected' disabled='disabled' style="text-align: center;">Select brand</option>
+                                    {% for brand in brand_search %}
+                                      <option value="{{brand}}" style="text-align: center;">{{brand}}</option>
                                     {% endfor %}
                                 </select>
                             </div>

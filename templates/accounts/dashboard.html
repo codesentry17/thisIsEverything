@@ -39,8 +39,9 @@
   </div>
   <table class="table table-hover">
     <thead>
-      <tr>
+      <tr style="font-size: larger; font-style: italic;">
         <th scope="col">Car Name</th>
+        <th scope="col">Price</th>
         <th scope="col">Inquiry Date</th>
         <th scope="col">Status</th>
         <th scope="col"></th>
@@ -51,9 +52,10 @@
       {% for inquiry in inquiries1 %}
       <tr onclick='location.href="{% url 'car_detail' inquiry.car_id %}";' style="cursor: pointer;">
         <td style="font-weight:bold;">{{inquiry.car_title|upper}}</td>
+        <td>Rs. {% carPrice map1 inquiry.car_id %}</td>
         <td>{{inquiry.create_date.date}}</td>
         <td>{% status1 map1 inquiry.car_id %}</td>
-        <td><a href="{% url 'delCarInq' inquiry.id %}" class="btn btn-outline-dark" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this inquiry?');">Delete</a></td>
+        <td style="padding-top: 5px;"><a href="{% url 'delCarInq' inquiry.id %}" class="btn btn-outline-dark" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this inquiry?');">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>
@@ -67,8 +69,9 @@
   </div>
   <table class="table table-hover">
     <thead>
-      <tr>
+      <tr style="font-size: larger; font-style: italic;">
         <th scope="col">Car Name</th>
+        <th scope="col">Min Bid</th>
         <th scope="col">Your Bid</th>
         <th scope="col">Bid Date</th>
         <th scope="col">Status</th>
@@ -80,10 +83,11 @@
       {% for inquiry in inquiries2 %}
       <tr onclick='location.href="{% url 'aucCarDetail' inquiry.car_id %}";' style="cursor: pointer;">
         <td style="font-weight: bold;">{{inquiry.car_title|upper}}</td>
-        <td>Rs. {{ inquiry.bid | intcomma }}</td>
+        <td>Rs. {% aucMinBid map2 inquiry.car_id %}</td>
+        <td>Rs. {{ inquiry.bid }}</td>
         <td>{{inquiry.create_date.date}}</td>
-        <td>{% status2 map21 map22 inquiry.car_id %}</td>
-        <td><a href="{% url 'delAucInq' inquiry.id %}" class="btn btn-outline-dark" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this bid?');">Delete</a></td>
+        <td>{% status2 map2 inquiry.car_id %}</td>
+        <td style="padding-top: 5px;"><a href="{% url 'delAucInq' inquiry.id %}" class="btn btn-outline-dark" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this bid?');">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>

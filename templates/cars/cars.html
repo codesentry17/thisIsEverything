@@ -141,10 +141,10 @@
                             </div>
 
                             <div class="form-group">
-                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="model">
-                                    <option selected="true" value="" style="text-align: center;">Model</option>
-                                    {% for model in model_search %}
-                                      <option value="{{model}}" style="text-align: center;">{{model}}</option>
+                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="brand">
+                                    <option selected="true" value="" style="text-align: center;">Brand</option>
+                                    {% for brand in brand_search %}
+                                      <option value="{{brand}}" style="text-align: center;">{{brand}}</option>
                                     {% endfor %}
                                 </select>
                             </div>

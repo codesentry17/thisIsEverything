@@ -19,7 +19,7 @@ def cars(request):
     page = request.GET.get('page')
     paged_cars = paginator.get_page(page)
 
-    model_search = Car.objects.filter(sold=False).values_list('model', flat=True).distinct()
+    brand_search = Car.objects.filter(sold=False).values_list('brand', flat=True).distinct()
     city_search = Car.objects.filter(sold=False).values_list('city', flat=True).distinct()
     color_search = Car.objects.filter(sold=False).values_list('color', flat=True).distinct()
     year_search = [x for x in range(2010,datetime.now().year)]
@@ -27,7 +27,7 @@ def cars(request):
 
     data = {
         'cars': paged_cars,
-        'model_search': sorted(model_search),
+        'brand_search': sorted(brand_search),
         'city_search': sorted(city_search),
         'year_search': year_search,
         'body_style_search': body_style_search,
@@ -44,10 +44,10 @@ def search(request):
         if keyword:
             cars = cars.filter(car_title__icontains=keyword)
 
-    if 'model' in request.GET:
-        model = request.GET['model']
-        if model:
-            cars = cars.filter(model__iexact=model)
+    if 'brand' in request.GET:
+        brand = request.GET['brand']
+        if brand:
+            cars = cars.filter(brand__iexact=brand)
 
     if 'city' in request.GET:
         city = request.GET['city']

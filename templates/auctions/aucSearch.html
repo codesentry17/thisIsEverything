@@ -77,7 +77,8 @@
                     </div>
                     <div class="detail" onclick='location.href="{% url 'aucCarDetail' car.id %}";' style="cursor: pointer;">
                         <h1 class="title">
-                            {{car.car_title}}
+                            <b>{{car.car_title}}</b>
+                            <p style="float: right; text-transform: uppercase;"><b>{{car.body_style}}</b></p>
                         </h1>
                         <div class="location">
                             <i class="flaticon-pin"></i>{{car.state}}, {{car.city}}

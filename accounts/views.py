@@ -69,16 +69,22 @@ def dashboard(request):
     
     map1 = {}
     for x in user_inquiry1:
-        map1[x.car_id] = get_object_or_404(Car,pk =x.car_id).sold
+        map1[x.car_id] = [
+            get_object_or_404(Car,pk =x.car_id).sold,
+            get_object_or_404(Car,pk=x.car_id).price
+        ]
 
     
     user_inquiry2 = aucContacts.objects.order_by('-create_date').filter(user_id=request.user.id)
     count2 = user_inquiry2.count()
 
-    map21, map22 = {},{}
+    map2 = {}
     for x in user_inquiry2:
-        map21[x.car_id] = get_object_or_404(Auction,pk=x.car_id).sold
-        map22[x.car_id] = get_object_or_404(Auction,pk=x.car_id).sell_date
+        map2[x.car_id] = [
+            get_object_or_404(Auction,pk=x.car_id).sold, 
+            get_object_or_404(Auction,pk=x.car_id).sell_date,
+            get_object_or_404(Auction, pk=x.car_id).price
+        ]
 
 
     data = {
@@ -86,11 +92,9 @@ def dashboard(request):
         'count1': count1,
         'map1': map1,
 
-
         'inquiries2': user_inquiry2,
         'count2': count2,
-        'map21':map21,
-        'map22':map22,
+        'map2': map2
     }
     return render(request, 'accounts/dashboard.html', data)
 

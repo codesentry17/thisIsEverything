@@ -22,7 +22,7 @@ def home(request):
     all_cars = paginator.get_page(page)
 
 
-    model_search = Car.objects.filter(sold=False).values_list('model', flat=True).distinct()
+    brand_search = Car.objects.filter(sold=False).values_list('brand', flat=True).distinct()
     city_search = Car.objects.filter(sold=False).values_list('city', flat=True).distinct()
     year_search = [x for x in range(2010,datetime.now().year)]
     body_style_search = Car.objects.filter(sold=False).values_list('body_style', flat=True).distinct()
@@ -30,7 +30,7 @@ def home(request):
         'teams': teams,
         'featured_cars': featured_cars,
         'all_cars': all_cars,
-        'model_search': sorted(model_search),
+        'brand_search': sorted(brand_search),
         'city_search': sorted(city_search),
         'year_search': year_search,
         'body_style_search': body_style_search,
