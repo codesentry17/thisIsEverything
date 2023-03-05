@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from contacts.models import Contact
-from auctions.models import aucContacts
+from cars.models import Car
+from auctions.models import aucContacts, Auction
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -64,12 +65,32 @@ def register(request):
 @login_required(login_url = 'login')
 def dashboard(request):
     user_inquiry1 = Contact.objects.order_by('-create_date').filter(user_id=request.user.id)
+    count1 = user_inquiry1.count()
+    
+    map1 = {}
+    for x in user_inquiry1:
+        map1[x.car_id] = get_object_or_404(Car,pk =x.car_id).sold
+
+    
     user_inquiry2 = aucContacts.objects.order_by('-create_date').filter(user_id=request.user.id)
-    # count = Contact.objects.order_by('-create_date').filter(user_id=request.user.id).count()
+    count2 = user_inquiry2.count()
+
+    map21, map22 = {},{}
+    for x in user_inquiry2:
+        map21[x.car_id] = get_object_or_404(Auction,pk=x.car_id).sold
+        map22[x.car_id] = get_object_or_404(Auction,pk=x.car_id).sell_date
+
 
     data = {
         'inquiries1': user_inquiry1,
+        'count1': count1,
+        'map1': map1,
+
+
         'inquiries2': user_inquiry2,
+        'count2': count2,
+        'map21':map21,
+        'map22':map22,
     }
     return render(request, 'accounts/dashboard.html', data)
 

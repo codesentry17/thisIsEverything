@@ -31,15 +31,7 @@
                     <div class="clearfix">
                         <h1 style="text-align: center; color: red;" ><b>THIS CAR IS SOLD OUT</b></h1>
                     </div>
-
-
-                    {% elif single_car.sell_date|timeuntil < '0 minutes' %}
-                    <div class="clearfix">
-                        <h1 style="text-align: center; color: red;" ><b>Auction TIME OUT !</b></h1>
-                    </div>
                     {% endif %}
-
-                    
                     <br><br>
                     <div class="clearfix">
                         {% include 'includes/messages.html' %}
@@ -174,9 +166,9 @@
                             onclick='location.href="{% url 'login' %}?next={{request.path}}"'
                             {% endif %}>Make Bid
                         </button>
+                        {% endif %}
                         
                         <br>
-                        {% endif %}
                         <h3 class="sidebar-title">Specs</h3>
                         <ul>
                             <li>
