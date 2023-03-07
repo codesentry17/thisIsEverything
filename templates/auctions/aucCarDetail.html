@@ -27,11 +27,19 @@
             <div class="col-lg-8 col-md-12 col-xs-12">
                 <div class="car-details-section">
                     <!-- Heading start -->
+                    
+                    
                     {% if single_car.sold %}
                     <div class="clearfix">
                         <h1 style="text-align: center; color: red;" ><b>THIS CAR IS SOLD OUT</b></h1>
                     </div>
+                    {% elif today >= single_car.sell_date %}
+                    <div class="clearfix">
+                        <h1 style="text-align: center; color: red;" ><b>Auction Time Out</b></h1>
+                    </div>
                     {% endif %}
+
+
                     <br><br>
                     <div class="clearfix">
                         {% include 'includes/messages.html' %}
@@ -157,7 +165,7 @@
                 <div class="sidebar-right">
                     <!-- Advanced search start -->
                     <div class="widget advanced-search d-none-992">
-                        {% if not single_car.sold %}
+                        {% if not single_car.sold and today < single_car.sell_date %}
                         <button class="btn btn-outline-danger bomd btn-block btn-lg" data-toggle="modal"
                             {% if user.is_authenticated %}
                             data-target="#inquiryModal"

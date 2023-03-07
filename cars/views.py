@@ -24,14 +24,16 @@ def cars(request):
     color_search = Car.objects.filter(sold=False).values_list('color', flat=True).distinct()
     year_search = [x for x in range(2010,datetime.now().year)]
     body_style_search = Car.objects.filter(sold=False).values_list('body_style', flat=True).distinct()
+    trans_search = ['automatic','manual']
 
     data = {
         'cars': paged_cars,
         'brand_search': sorted(brand_search),
         'city_search': sorted(city_search),
+        'color_search': sorted(color_search),
         'year_search': year_search,
         'body_style_search': body_style_search,
-        'color_search': sorted(color_search),
+        'trans_search': trans_search,
     }
     return render(request, 'cars/cars.html', data)
 
@@ -68,6 +70,11 @@ def search(request):
         body_style = request.GET['body_style']
         if body_style:
             cars = cars.filter(body_style__iexact=body_style)
+    
+    if 'transmission' in request.GET:
+        transmission = request.GET['transmission']
+        if transmission:
+            cars = cars.filter(transmission__iexact=transmission)
 
     if 'min_price' in request.GET:
         min_price = request.GET['min_price']

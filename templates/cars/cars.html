@@ -174,9 +174,17 @@
                             </div>
                             <div class="form-group">
                                 <select class="form-control search-fields" onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="body_style">
-                                    <option selected="true" value="" style="text-align: center;">Select Type Of Car</option>
+                                    <option selected="true" value="" style="text-align: center;">Body Style</option>
                                     {% for body_style in body_style_search %}
                                       <option value="{{body_style}}" style="text-align: center;">{{body_style}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="transmission">
+                                    <option selected="true" value="" style="text-align: center;">Transmission</option>
+                                    {% for t in trans_search %}
+                                      <option value="{{t}}" style="text-align: center;">{{t}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
