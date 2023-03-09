@@ -23,7 +23,7 @@ def cars(request):
     city_search = Car.objects.filter(sold=False).values_list('city', flat=True).distinct()
     color_search = Car.objects.filter(sold=False).values_list('color', flat=True).distinct()
     year_search = [x for x in range(2010,datetime.now().year)]
-    body_style_search = Car.objects.filter(sold=False).values_list('body_style', flat=True).distinct()
+    body_style_search = ['sedan','hatchback','SUV']
     trans_search = ['automatic','manual']
 
     data = {
@@ -32,7 +32,7 @@ def cars(request):
         'city_search': sorted(city_search),
         'color_search': sorted(color_search),
         'year_search': year_search,
-        'body_style_search': body_style_search,
+        'body_style_search': sorted(body_style_search),
         'trans_search': trans_search,
     }
     return render(request, 'cars/cars.html', data)

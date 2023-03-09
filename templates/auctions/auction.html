@@ -110,6 +110,8 @@
                             </div>
                         </div>
                     </div>
+                    {% empty %}
+                    <h1 style="margin: auto;">No Cars up for Auction at the moment</h1>
                     {% endfor %}
                 </div>
             </div>
@@ -164,7 +166,7 @@
                             </div>
                             <div class="range-slider clearfix">
                                             <label>Price</label>
-                                            <div data-min="0" data-max="5000000"  data-min-name="min_price" data-max-name="max_price" data-unit="INR" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                            <div data-min="0" data-max="2000000"  data-min-name="min_price" data-max-name="max_price" data-unit="INR" class="range-slider-ui ui-slider" aria-disabled="false"></div>
                                             <div class="clearfix"></div>
                                         </div>
                             <div class="form-group">

@@ -25,7 +25,7 @@ def home(request):
     brand_search = Car.objects.filter(sold=False).values_list('brand', flat=True).distinct()
     city_search = Car.objects.filter(sold=False).values_list('city', flat=True).distinct()
     year_search = [x for x in range(2010,datetime.now().year)]
-    body_style_search = Car.objects.filter(sold=False).values_list('body_style', flat=True).distinct()
+    body_style_search = ['sedan','hatchback','SUV']
     data = {
         'teams': teams,
         'featured_cars': featured_cars,
