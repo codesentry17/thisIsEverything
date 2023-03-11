@@ -19,9 +19,6 @@ def aucInquiry(request):
         phone = request.POST['phone']
         bid = str(request.POST['bid'])
         message = request.POST['message']
-
-
-
     
     if request.user.is_authenticated:
             user_id = request.user.id
@@ -55,7 +52,10 @@ def auction(request):
     city_search = Auction.objects.filter(sell_date__gt=datetime.now().date()).values_list('city', flat=True).distinct()
     color_search = Auction.objects.filter(sell_date__gt=datetime.now().date()).values_list('color', flat=True).distinct()
     year_search = [x for x in range(2010,datetime.now().year)]
-    body_style_search = Auction.objects.filter(sell_date__gt=datetime.now().date()).values_list('body_style', flat=True).distinct()
+    body_style_search = ['SUV','sedan','hatchback']
+    trans_search = ['automatic', 'manual']
+    fuel_search = ['diesel', 'petrol', 'hybrid']
+
     
     data={
         'aucCars': cars,
@@ -64,6 +64,8 @@ def auction(request):
         'year_search': year_search,
         'body_style_search': body_style_search,
         'color_search': sorted(color_search),
+        'trans_search': trans_search,
+        'fuel_search': fuel_search,
         'today':datetime.now().date(),
     }
     return render(request, 'auctions/auction.html',data)
@@ -81,44 +83,66 @@ def aucCarDetail(request, id):
 def aucSearch(request):
     cars = Auction.objects.order_by('sell_date').filter(sell_date__gt=datetime.now().date())
 
+    filters = {}
+
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
-        if keyword:
+        if keyword != '':
+            filters['Keyword']=keyword
             cars = cars.filter(car_title__icontains=keyword)
 
     if 'brand' in request.GET:
         brand = request.GET['brand']
-        if brand:
+        if brand != '':
+            filters['Brand']=brand
             cars = cars.filter(brand__iexact=brand)
 
     if 'city' in request.GET:
         city = request.GET['city']
-        if city:
+        if city != '':
+            filters['City']=city
             cars = cars.filter(city__iexact=city)
 
     if 'year' in request.GET:
         year = request.GET['year']
-        if year:
+        if year != '':
+            filters['Year']=year
             cars = cars.filter(year__iexact=year)
 
     if 'color' in request.GET:
         color = request.GET['color']
-        if color:
+        if color != '':
+            filters['Color']=color
             cars = cars.filter(color__iexact=color)
 
     if 'body_style' in request.GET:
         body_style = request.GET['body_style']
-        if body_style:
+        if body_style != '':
+            filters['Body']=body_style
             cars = cars.filter(body_style__iexact=body_style)
+    
+    if 'transmission' in request.GET:
+        transmission = request.GET['transmission']
+        if transmission != '':
+            filters['Transmission']=transmission
+            cars = cars.filter(transmission__iexact=transmission)
 
-    if 'min_price' in request.GET:
+    if 'fuel_search' in request.GET:
+        fuel_type = request.GET['fuel_search']
+        if fuel_type != '':
+            filters['Fuel']=fuel_type
+            cars = cars.filter(fuel_type__iexact=fuel_type)
+
+    if 'min_price' or 'max_price' in request.GET:
         min_price = request.GET['min_price']
         max_price = request.GET['max_price']
-        if max_price:
-            cars = cars.filter(price__gte=min_price, price__lte=max_price)
+        cars = cars.filter(price__gte=min_price,price__lte=max_price)
+        filters['Minimum Bid Price']="Rs. "+min_price
+        filters['Maximum Bid Price']="Rs. "+max_price
 
     data={
         'aucCars': cars,
+        'filters': filters,
         'today':datetime.now().date(),
     }
 

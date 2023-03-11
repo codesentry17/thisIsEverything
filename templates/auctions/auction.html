@@ -33,7 +33,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-9 col-md-6">
+            <div class="col-lg-10 col-md-6">
                 <div class="row">
                     {% for car in aucCars %}
                     <div class="col-lg-4 col-md-6">
@@ -115,7 +115,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-2 col-md-6">
                 <div style="position: sticky; top: 120px;">
                     <!-- Advanced search start -->
                     <div class="widget advanced-search2" style="padding-top: 0px;">
@@ -158,9 +158,25 @@
                             </div>
                             <div class="form-group">
                                 <select class="form-control search-fields" onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="body_style">
-                                    <option selected="true" value="" style="text-align: center;">Select Type Of Car</option>
+                                    <option selected="true" value="" style="text-align: center;">Body</option>
                                     {% for body_style in body_style_search %}
                                       <option value="{{body_style}}" style="text-align: center;">{{body_style}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="transmission">
+                                    <option selected="true" value="" style="text-align: center;">Transmission</option>
+                                    {% for t in trans_search %}
+                                      <option value="{{t}}" style="text-align: center;">{{t}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control search-fields" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="fuel_search">
+                                    <option selected="true" value="" style="text-align: center;">Fuel</option>
+                                    {% for f in fuel_search %}
+                                      <option value="{{f}}" style="text-align: center;">{{f}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
