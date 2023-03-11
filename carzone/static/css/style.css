@@ -9768,13 +9768,13 @@ a.nav-link.active{
     color: red;
     font-weight: bold;
     text-align: center;
-    margin: 10px auto;
-    padding: 5px;
-    width: 15%;
+    margin: auto;
+    padding: 5px 5px;
+    width: 75%;
     transition-duration: 0.4s;
     cursor: pointer;
-    border-radius: 3px;
-    border: 1px solid red;
+    border: 2px solid pink;
+    border-radius: 30px;
 }
 .buttonX:hover{
     background-color: #f44336;

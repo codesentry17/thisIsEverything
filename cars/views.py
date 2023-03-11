@@ -15,7 +15,7 @@ def car_detail(request, id):
 
 def cars(request):
     cars = Car.objects.order_by('-created_date').filter(sold=False)
-    paginator = Paginator(cars, 6)
+    paginator = Paginator(cars, 9)
     page = request.GET.get('page')
     paged_cars = paginator.get_page(page)
 
@@ -25,6 +25,7 @@ def cars(request):
     year_search = [x for x in range(2010,datetime.now().year)]
     body_style_search = ['sedan','hatchback','SUV']
     trans_search = ['automatic','manual']
+    fuel_search = ['diesel','petrol','hybrid']
 
     data = {
         'cars': paged_cars,
@@ -34,47 +35,63 @@ def cars(request):
         'year_search': year_search,
         'body_style_search': sorted(body_style_search),
         'trans_search': trans_search,
+        'fuel_search': fuel_search,
     }
     return render(request, 'cars/cars.html', data)
 
 
 def search(request):
     cars = Car.objects.order_by('-created_date').filter(sold=False)
+    
+    filters = {} 
 
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
-        if keyword:
+        if keyword != '':
+            filters['Keyword']=keyword
             cars = cars.filter(car_title__icontains=keyword)
 
     if 'brand' in request.GET:
         brand = request.GET['brand']
-        if brand:
+        if brand != '':
+            filters['Brand']=brand
             cars = cars.filter(brand__iexact=brand)
 
     if 'city' in request.GET:
         city = request.GET['city']
-        if city:
+        if city != '':
+            filters['City']=city
             cars = cars.filter(city__iexact=city)
 
     if 'year' in request.GET:
         year = request.GET['year']
-        if year:
+        if year != '':
+            filters['Year']=year
             cars = cars.filter(year__iexact=year)
 
     if 'color' in request.GET:
         color = request.GET['color']
-        if color:
+        if color != '':
+            filters['Color']=color
             cars = cars.filter(color__iexact=color)
 
     if 'body_style' in request.GET:
         body_style = request.GET['body_style']
-        if body_style:
+        if body_style != '':
+            filters['Body']=body_style
             cars = cars.filter(body_style__iexact=body_style)
     
     if 'transmission' in request.GET:
         transmission = request.GET['transmission']
-        if transmission:
+        if transmission != '':
+            filters['Transmission']=transmission
             cars = cars.filter(transmission__iexact=transmission)
+
+    if 'fuel_search' in request.GET:
+        fuel_type = request.GET['fuel_search']
+        if fuel_type != '':
+            filters['Fuel']=fuel_type
+            cars = cars.filter(fuel_type__iexact=fuel_type)
 
     if 'min_price' in request.GET:
         min_price = request.GET['min_price']
@@ -84,6 +101,7 @@ def search(request):
 
     data = {
         'cars': cars,
+        'filters': filters,
     }
     return render(request, 'cars/search.html', data)
 
