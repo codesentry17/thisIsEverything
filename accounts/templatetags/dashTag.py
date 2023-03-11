@@ -19,12 +19,12 @@ def carPrice(dictionary,key):
 
 @register.simple_tag
 def status2(dictionary,key):
-    if dictionary.get(key)[0] or dictionary.get(key)[1]<=datetime.now().date():
+    if dictionary.get(key)[0]<=datetime.now().date():
         return mark_safe("<td style='color:red; font-weight:bold;'>SOLD</td>")    
     else:
         return mark_safe("<td style='color:green; font-weight:bold;'>AVAILABLE</td>")
 
 @register.simple_tag
 def aucMinBid(dictionary,key):
-    return dictionary.get(key)[2]
+    return dictionary.get(key)[1]
 

@@ -49,13 +49,13 @@ def aucInquiry(request):
     return redirect('/auctions/'+car_id)
 
 def auction(request):
-    cars = Auction.objects.order_by('sell_date').filter(sold=False, sell_date__gt=datetime.now().date())
+    cars = Auction.objects.order_by('sell_date').filter(sell_date__gt=datetime.now().date())
     
-    brand_search = Auction.objects.filter(sold=False, sell_date__gt=datetime.now().date()).values_list('brand', flat=True).distinct()
-    city_search = Auction.objects.filter(sold=False, sell_date__gt=datetime.now().date()).values_list('city', flat=True).distinct()
-    color_search = Auction.objects.filter(sold=False, sell_date__gt=datetime.now().date()).values_list('color', flat=True).distinct()
+    brand_search = Auction.objects.filter(sell_date__gt=datetime.now().date()).values_list('brand', flat=True).distinct()
+    city_search = Auction.objects.filter(sell_date__gt=datetime.now().date()).values_list('city', flat=True).distinct()
+    color_search = Auction.objects.filter(sell_date__gt=datetime.now().date()).values_list('color', flat=True).distinct()
     year_search = [x for x in range(2010,datetime.now().year)]
-    body_style_search = Auction.objects.filter(sold=False, sell_date__gt=datetime.now().date()).values_list('body_style', flat=True).distinct()
+    body_style_search = Auction.objects.filter(sell_date__gt=datetime.now().date()).values_list('body_style', flat=True).distinct()
     
     data={
         'aucCars': cars,
@@ -79,7 +79,7 @@ def aucCarDetail(request, id):
     
 
 def aucSearch(request):
-    cars = Auction.objects.order_by('sell_date').filter(sold=False, sell_date__gt=datetime.now().date())
+    cars = Auction.objects.order_by('sell_date').filter(sell_date__gt=datetime.now().date())
 
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']

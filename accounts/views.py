@@ -81,7 +81,6 @@ def dashboard(request):
     map2 = {}
     for x in user_inquiry2:
         map2[x.car_id] = [
-            get_object_or_404(Auction,pk=x.car_id).sold, 
             get_object_or_404(Auction,pk=x.car_id).sell_date,
             get_object_or_404(Auction, pk=x.car_id).price
         ]
