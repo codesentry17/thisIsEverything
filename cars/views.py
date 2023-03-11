@@ -93,11 +93,12 @@ def search(request):
             filters['Fuel']=fuel_type
             cars = cars.filter(fuel_type__iexact=fuel_type)
 
-    if 'min_price' in request.GET:
+    if 'min_price' or 'max_price' in request.GET:
         min_price = request.GET['min_price']
         max_price = request.GET['max_price']
-        if max_price:
-            cars = cars.filter(price__gte=min_price, price__lte=max_price)
+        cars = cars.filter(price__gte=min_price,price__lte=max_price)
+        filters['Minimum Price']="Rs. "+min_price
+        filters['Maximum Price']="Rs. "+max_price
 
     data = {
         'cars': cars,

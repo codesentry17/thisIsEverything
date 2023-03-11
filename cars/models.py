@@ -6,16 +6,10 @@ from multiselectfield import MultiSelectField
 # Create your models here.
 class Car(models.Model):
 
-    state_choice = (
-        ('AZ', 'Arizona'),
-        ('IL', 'Illinois'),
-        ('KY', 'Kentucky'),
-        ('LA', 'Louisiana'),
-        ('NE', 'Nebraska'),
-        ('NY', 'New York'),
-        ('OH', 'Ohio'),
-        ('TN', 'Tennessee'),
-        ('WI', 'Wisconsin'),
+    city_choice = (
+        ('Thane','Thane'),
+        ('Vashi','Vashi'),
+        ('Powai','Powai'),
     )
 
     year_choice = []
@@ -47,8 +41,7 @@ class Car(models.Model):
     )
 
     car_title = models.CharField(max_length=255)
-    state = models.CharField(choices=state_choice, max_length=100)
-    city = models.CharField(max_length=100)
+    city = models.CharField(choices=city_choice, max_length=100)
     color = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
     year = models.IntegerField(('year'), choices=year_choice)
