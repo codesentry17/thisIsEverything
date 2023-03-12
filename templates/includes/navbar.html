@@ -64,7 +64,6 @@
                         {% endif %}
                          href="{% url 'contact' %}">Contact</a>
                     </li>
-
                     <li class="nav-item dropdown">
                         <a
                         {% if 'auction' in request.path %}
@@ -74,7 +73,15 @@
                         {% endif %}
                          href="{% url 'auction' %}">Auctions</a>
                     </li>
-
+                    <li class="nav-item dropdown">
+                        <a
+                        {% if 'filterForm' in request.path %}
+                        class="nav-link active"
+                        {% else %}
+                        class="nav-link"
+                        {% endif %}
+                         href="{% url 'filterForm' %}">Notify</a>
+                    </li>
                     <li class="nav-item dropdown m-hide">
                         <a href="#full-page-search" class="nav-link h-icon">
                             <i class="fa fa-search"></i>

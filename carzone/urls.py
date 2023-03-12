@@ -11,4 +11,5 @@ urlpatterns = [
     path('socialaccounts/', include('allauth.urls')),
     path('contacts/', include('contacts.urls')),
     path('auctions/', include('auctions.urls')),
+    path('notify/', include('notify.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
