@@ -3,6 +3,7 @@
 {% block title %} | Get Notified {% endblock %}
 {% block content %}
 
+{% load humanize %}
 
 <!-- Sub banner start -->
 <div class="sub-banner overview-bgi">
@@ -24,42 +25,101 @@
         <!-- Main title -->
         <div class="main-title text-center">
             <h1>Get Notified when your Filters <span>Match</span></h1>
+            <h3>Fill whatever field is necessary</h3>
         </div>
-        <form action="#" method="POST" enctype="multipart/form-data">
-          {% include 'includes/messages.html' %}
-          {% csrf_token %}
+        {% include 'includes/messages.html' %}
+        <form action="{% url 'filterSubmit' %}" method="POST" onsubmit="return confirm('Do you really want to submit the form?');">
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{user.id}}">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
+                        <div class="col-md-3" style="margin-left:auto;">
+                            <h5>Name</h5>
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" placeholder="ex: john" required
+                                {% if user.is_authenticated %} value="{{user.first_name}}" {% endif %}>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="margin-right: auto;">
+                            <h5>Email</h5>
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" placeholder="ex: johndoe@gmail.com">
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="row">
                         <div class="col-md-3">
-                            <div class="form-group name">
-                                <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+                            <h5>Brand</h5>
+                            <div class="form-group">
+                                <input type="text" name="brand" class="form-control" placeholder="ex: Tata, Hyundai...">
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group email">
-                                <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            <h5>Model</h5>
+                            <div class="form-group">
+                                <input type="text" name="model" class="form-control" placeholder="ex: Nexon, i20...">
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group subject">
-                                <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+                            <h5>Fuel</h5>
+                            <div class="form-group">
+                                <select class="form-control" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="fuel">
+                                    <option value="">Fuel</option>
+                                    <option value="diesel">Diesel</option>
+                                    <option value="petrol">Petrol</option>
+                                    <option value="diesel">Hybrid</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group number">
-                                <input type="text" name="phone" class="form-control" placeholder="Number">
+                            <h5>Transmission</h5>
+                            <div class="form-group">
+                                <select class="form-control" onfocus='this.size=2;' onblur='this.size=1;'  onchange='this.size=1; this.blur();' name="transmission">
+                                    <option value="">Transmission</option>
+                                    <option value="automatic">Automatic</option>
+                                    <option value="manual">Maunal</option>
+                                </select>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <h5>Color</h5>
+                            <div class="form-group">
+                                <input type="text" name="color" class="form-control" placeholder="ex: red, white...">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h5>Year Onward</h5>
+                            <div class="form-group">
+                                <select class="form-control" onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="year">
+                                    <option value="2010">Year</option>
+                                    {% for year in years %}
+                                    <option value="{{year}}">{{year}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h5>Mileage Above</h5>
+                            <div class="form-group">
+                                <input type="number" value="0" name="milage" class="form-control" placeholder="ex: 15, 18...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group message">
-                                <textarea class="form-control" name="message" placeholder="Write message"></textarea>
+                            <h5>Price Range</h5>
+                            <div class="range-slider clearfix">
+                                <div data-min="0" data-max="3000000"  data-min-name="min_price" data-max-name="max_price" data-unit="INR" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="send-btn text-center">
-                                <button type="submit" class="btn btn-md button-theme">Send Message</button>
-                            </div>
+                    </div>
+                    <br><br>
+                    <div class="col-md-12">
+                        <div class="send-btn text-center">
+                            <button type="submit" class="btn btn-md button-theme">Submit</button>
                         </div>
                     </div>
                 </div>
