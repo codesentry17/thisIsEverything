@@ -28,7 +28,8 @@
             <h3>Fill whatever field is necessary</h3>
         </div>
         {% include 'includes/messages.html' %}
-        <form action="{% url 'filterSubmit' %}" method="POST" onsubmit="return confirm('Do you really want to submit the form?');">
+        <form action="{% url 'filterSubmit' %}" method="POST"
+            onsubmit="return confirm('Do you really want to submit the form?');">
             {% csrf_token %}
             <input type="hidden" name="user_id" value="{{user.id}}">
             <div class="row">
@@ -37,14 +38,15 @@
                         <div class="col-md-3" style="margin-left:auto;">
                             <h5>Name</h5>
                             <div class="form-group">
-                                <input type="text" name="name" class="form-control" placeholder="ex: john" required
+                                <input type="text" name="name" class="form-control" placeholder="ex: john" required 
                                 {% if user.is_authenticated %} value="{{user.first_name}}" {% endif %}>
                             </div>
                         </div>
                         <div class="col-md-3" style="margin-right: auto;">
                             <h5>Email</h5>
                             <div class="form-group">
-                                <input type="email" name="email" class="form-control" placeholder="ex: johndoe@gmail.com">
+                                <input type="email" name="email" class="form-control"
+                                    placeholder="ex: johndoe@gmail.com" required>
                             </div>
                         </div>
                     </div>
@@ -63,9 +65,22 @@
                             </div>
                         </div>
                         <div class="col-md-3">
+                            <h5>Body</h5>
+                            <div class="form-group">
+                                <select style="height: 45px;" class="form-control" onfocus='this.size=2;'
+                                    onblur='this.size=1;' onchange='this.size=1; this.blur();' name="body_style">
+                                    <option value="">Body</option>
+                                    <option value="sedan">sedan</option>
+                                    <option value="SUV">SUV</option>
+                                    <option value="hatchback">hatchback</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <h5>Fuel</h5>
                             <div class="form-group">
-                                <select class="form-control" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="fuel">
+                                <select style="height: 45px;" class="form-control" onfocus='this.size=3;'
+                                    onblur='this.size=1;' onchange='this.size=1; this.blur();' name="fuel">
                                     <option value="">Fuel</option>
                                     <option value="diesel">Diesel</option>
                                     <option value="petrol">Petrol</option>
@@ -76,7 +91,8 @@
                         <div class="col-md-3">
                             <h5>Transmission</h5>
                             <div class="form-group">
-                                <select class="form-control" onfocus='this.size=2;' onblur='this.size=1;'  onchange='this.size=1; this.blur();' name="transmission">
+                                <select style="height: 45px;" class="form-control" onfocus='this.size=2;'
+                                    onblur='this.size=1;' onchange='this.size=1; this.blur();' name="transmission">
                                     <option value="">Transmission</option>
                                     <option value="automatic">Automatic</option>
                                     <option value="manual">Maunal</option>
@@ -92,7 +108,8 @@
                         <div class="col-md-3">
                             <h5>Year Onward</h5>
                             <div class="form-group">
-                                <select class="form-control" onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="year">
+                                <select style="height: 45px;" class="form-control" onfocus='this.size=4;'
+                                    onblur='this.size=1;' onchange='this.size=1; this.blur();' name="year">
                                     <option value="2010">Year</option>
                                     {% for year in years %}
                                     <option value="{{year}}">{{year}}</option>
@@ -103,17 +120,21 @@
                         <div class="col-md-3">
                             <h5>Mileage Above</h5>
                             <div class="form-group">
-                                <input type="number" value="0" name="milage" class="form-control" placeholder="ex: 15, 18...">
+                                <input type="number" min="10" value="10" name="milage" class="form-control"
+                                    placeholder="ex: 15, 18...">
                             </div>
                         </div>
                     </div>
+                    <br><br>
                     <div class="row">
                         <div class="col-md-12">
-                            <h5>Price Range</h5>
-                            <div class="range-slider clearfix">
+                            <h5 style="text-align: center;">Price Range</h5><br>
+
+                            <div style="width: 70%; margin: auto;" class="range-slider clearfix">
                                 <div data-min="0" data-max="3000000"  data-min-name="min_price" data-max-name="max_price" data-unit="INR" class="range-slider-ui ui-slider" aria-disabled="false"></div>
                                 <div class="clearfix"></div>
                             </div>
+
                         </div>
                     </div>
                     <br><br>

@@ -8,6 +8,7 @@ class Specification(models.Model):
     email = models.EmailField(max_length=100,blank=True)
     brand = models.CharField(max_length=100,blank=True)
     model = models.CharField(max_length=100,blank=True)
+    body_style = models.CharField(max_length=100,blank=True)
     fuel = models.CharField(max_length=100,blank=True)
     transmission = models.CharField(max_length=100,blank=True)
     color = models.CharField(max_length=100,blank=True)
