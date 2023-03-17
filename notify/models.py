@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.utils.safestring import mark_safe
 
 # Create your models here.
 
@@ -17,5 +18,27 @@ class Specification(models.Model):
     milage = models.IntegerField(blank=True)
     min_price = models.IntegerField(blank=True)
     max_price = models.IntegerField(blank=True)
-    created_date = models.DateTimeField(default=datetime.now, blank=True)
+    created_date = models.DateField(default=datetime.now, blank=True)
+    
+    def textGeneration(self):
+        text = ""
+        if self.brand:
+            text += "Brand: "+self.brand.capitalize()+"<br>"
+        if self.model:
+            text += "Model: "+self.model.capitalize()+"<br>"
+        if self.body_style:
+            text += "Body: "+self.body_style.capitalize()+"<br>"
+        if self.fuel:
+            text += "Fuel: "+self.fuel.capitalize()+"<br>"
+        if self.transmission:
+            text += "Transmission: "+self.transmission.capitalize()+"<br>"
+        if self.color:
+            text += "Body: "+self.color.capitalize()+"<br>"
+
+        text += "Year: "+str(self.year)+" Onwards<br>"
+        text += "Mileage: "+str(self.milage)+"+<br>"
+        text += "Rs. "+str(self.min_price)+" >= Price <= Rs. "+str(self.max_price)
+        
+        return mark_safe(text)
+
     

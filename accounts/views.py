@@ -87,8 +87,9 @@ def dashboard(request):
         ]
 
 
-
-    filtered_cars = Specification.objects.filter(user_id=request.user.id)
+    filters = Specification.objects.order_by('-created_date').filter(user_id=request.user.id)
+    count3 = filters.count()
+        
 
     data = {
         'inquiries1': user_inquiry1,
@@ -99,8 +100,9 @@ def dashboard(request):
         'count2': count2,
         'map2': map2,
 
-        'filtered_cars': filtered_cars,
-        'count3': filtered_cars.count()
+        'filters': filters,
+        'count3': count3,
+        
     }
     return render(request, 'accounts/dashboard.html', data)
 

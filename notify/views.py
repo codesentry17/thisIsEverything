@@ -47,6 +47,16 @@ def filterSubmit(request):
     return redirect('/accounts/dashboard')
 
 
+def foundCar(request,id):
+    data={}
+    return render(request, 'notify/filtered_cars.html',data)
+
+
+def deleteFilter(request, id):
+    specification = Specification.objects.get(id = id)
+    specification.delete()
+    messages.success(request,'You have deleted your Car Filter')
+    return redirect('dashboard')
 
 
 
