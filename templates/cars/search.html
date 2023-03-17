@@ -99,7 +99,11 @@
                         </div>
                     </div>
                     {% empty %}
-                    <h1 style="margin: auto;">No Cars Matched your Filter :-(</h1>
+                    <h1 style="margin: auto;">No Cars Matched your Filter</h1>
+                    <br><br><br>
+                    {% if user.is_authenticated %}
+                    <div class="buttonX" style="margin-bottom: 5px;" onclick='location.href="{% url 'filterForm' %}";'>Notify when in Stock?</div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>

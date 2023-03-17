@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 
@@ -16,5 +17,5 @@ class Specification(models.Model):
     milage = models.IntegerField(blank=True)
     min_price = models.IntegerField(blank=True)
     max_price = models.IntegerField(blank=True)
-
+    created_date = models.DateTimeField(default=datetime.now, blank=True)
     

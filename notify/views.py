@@ -44,7 +44,7 @@ def filterSubmit(request):
         specs.save()
         messages.success(request, "Your filter is submitted and you'll be notified soon")
 
-    return redirect('/notify/')
+    return redirect('/accounts/dashboard')
 
 
 

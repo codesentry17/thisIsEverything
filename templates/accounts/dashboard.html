@@ -31,12 +31,12 @@
   </div>
 
 
-  {% if inquiries1 or inquiries2 %}
+  {% if inquiries1 or inquiries2 or filtered_cars %}
   {% if inquiries1 %}
-  <div class="main-title" style="text-align:left">
+  <div class="main-title">
     <br><br>
     <h2>{{count1}}  Inquiry for Cars:</h2>
-  </div>
+  </div><br>
   <table class="table table-hover">
     <thead>
       <tr style="font-size: larger; font-style: italic;">
@@ -63,10 +63,10 @@
   {% endif %}
 
   {% if inquiries2 %}
-  <div class="main-title" style="text-align:left;">
+  <div class="main-title">
     <br><br>
     <h2>{{count2}} Auction Bids for Cars:</h2>
-  </div>
+  </div><br>
   <table class="table table-hover">
     <thead>
       <tr style="font-size: larger; font-style: italic;">
@@ -93,10 +93,40 @@
     </tbody>
   </table>
   {% endif %}
+
+  {% if filtered_cars %}
+  <div class="main-title">
+    <br><br>
+    <h2>{{count3}} Filters submitted:</h2>
+  </div><br>
+  <table class="table table-hover">
+    <thead>
+      <tr style="font-size: larger; font-style: italic;">
+        <th scope="col">Description</th>
+        <th scope="col">Cars Found</th>
+        <th scope=""></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for cars in filtered_cars %}
+      <tr onclick='location.href="template/notify/filtered_cars.html";' style="cursor: pointer;">
+        <td></td>
+        <td></td>
+        <td style="padding-top: 5px;"><a href="#" class="btn btn-outline-dark" onclick="event.stopPropagation(); return confirm('Are you sure you want to delete this filter?');">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+  {% endif %}  
+
   {% else %}
   <div class="main-title" style="text-align:left important;">
     <h1>No actions performed</h1>
   </div>
+  
   {% endif %}
 
 </div>

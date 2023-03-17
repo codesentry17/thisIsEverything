@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from contacts.models import Contact
 from cars.models import Car
 from auctions.models import aucContacts, Auction
+from notify.models import Specification
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -86,6 +87,9 @@ def dashboard(request):
         ]
 
 
+
+    filtered_cars = Specification.objects.filter(user_id=request.user.id)
+
     data = {
         'inquiries1': user_inquiry1,
         'count1': count1,
@@ -93,7 +97,10 @@ def dashboard(request):
 
         'inquiries2': user_inquiry2,
         'count2': count2,
-        'map2': map2
+        'map2': map2,
+
+        'filtered_cars': filtered_cars,
+        'count3': filtered_cars.count()
     }
     return render(request, 'accounts/dashboard.html', data)
 
