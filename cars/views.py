@@ -66,8 +66,8 @@ def search(request):
     if 'year' in request.GET:
         year = request.GET['year']
         if year != '':
-            filters['Year']=year
-            cars = cars.filter(year__iexact=year)
+            filters['Year ^']=year
+            cars = cars.filter(year__gte=year)
 
     if 'color' in request.GET:
         color = request.GET['color']
