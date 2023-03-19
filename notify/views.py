@@ -6,6 +6,8 @@ from cars.models import Car
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 # Create your views here.
 
@@ -83,15 +85,6 @@ def foundCar(request,id):
 
     "filtering cars that match the specification"
 
-
-
-
-
-
-
-
-
-
     data={
         'name': specs.name,
         'filter': filters,
@@ -108,3 +101,44 @@ def deleteFilter(request, id):
 
 
 
+@receiver(post_save, sender=Car)
+def notifyUser(sender, instance, created,  *args, **kwargs):
+
+
+    # received one tuple from the Car model...
+
+    specs = Specification.objects.filter(year__lte=instance.year, milage__lte=instance.milage, min_price__lte=instance.price, max_price__gte=instance.price)
+
+    print('Got',specs.count(),'specification rows selected initially')
+
+    count = 0
+    for s in specs:
+        print('iteration',count)
+
+        if s.brand:
+            if s.brand.lower()!=instance.brand.lower():
+                continue
+        if s.model:
+            if s.model.lower() not in instance.model.lower():
+                continue
+        if s.body_style:
+            if s.body_style!=instance.body_style:
+                continue
+        if s.fuel:
+            if s.fuel!=instance.fuel_type:
+                continue
+        if s.transmission:
+            if s.transmission!=instance.transmission:
+                continue
+        if s.color:
+            if s.color!=instance.color:
+                continue
+        
+        print('\n\nCar Matched to a filter with ID',s.id,'\n\n')
+
+        count+=1
+        
+
+    
+
+        
