@@ -82,7 +82,7 @@ def aucCarDetail(request, id):
 
 def aucSearch(request):
     cars = Auction.objects.order_by('sell_date').filter(sell_date__gt=datetime.now().date())
-
+    print(cars.count(),'\n\n')
     filters = {}
 
     if 'keyword' in request.GET:
@@ -106,8 +106,8 @@ def aucSearch(request):
     if 'year' in request.GET:
         year = request.GET['year']
         if year != '':
-            filters['Year']=year
-            cars = cars.filter(year__iexact=year)
+            filters['Since Year']=year
+            cars = cars.filter(year__gte=year)
 
     if 'color' in request.GET:
         color = request.GET['color']
@@ -139,6 +139,7 @@ def aucSearch(request):
         cars = cars.filter(price__gte=min_price,price__lte=max_price)
         filters['Minimum Bid Price']="Rs. "+min_price
         filters['Maximum Bid Price']="Rs. "+max_price
+
 
     data={
         'aucCars': cars,
