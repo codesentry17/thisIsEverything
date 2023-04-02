@@ -62,7 +62,7 @@
         <button type="submit" class="btn btn-sm button-theme">Search</button>
     </form>
     {% else %}
-    <form action="{% url 'search' %}" class="search-header">
+    <form action="{% url 'search' %}" method="get" class="search-header">
         <input type="search" value="" placeholder="type keyword(s) here. Eg: audi, benz etc" name='keyword' />
         <button type="submit" class="btn btn-sm button-theme">Search</button>
     </form>

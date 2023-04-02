@@ -135,13 +135,13 @@
                 <div style="position: sticky; top: 120px;">
                     <!-- Advanced search start -->
                     <div class="widget advanced-search2" style="padding-top: 0px; padding-left: 0px; padding-right: 0px;">
-                        <form action="{% url 'search' %}" method="">
+                        <form action="{% url 'search' %}" method="get">
                             <div class="form-group">
                                 <input type="text" name="keyword" placeholder="Search by model, etc" class="form-control">
                             </div>
 
                             <div class="form-group">
-                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="brand">
+                                <select class="form-control" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="brand">
                                     <option selected="true" value="" style="text-align: center;">Brand</option>
                                     {% for brand in brand_search %}
                                       <option value="{{brand}}" style="text-align: center;">{{brand}}</option>
@@ -149,7 +149,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="city">
+                                <select class="form-control" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="city">
                                     <option selected="true" value="" style="text-align: center;">Showroom</option>
                                     {% for city in city_search %}
                                       <option value="{{city}}" style="text-align: center;">{{city}}</option>
@@ -157,7 +157,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="year">
+                                <select class="form-control" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="year">
                                     <option selected="true" value="2010" style="text-align: center;">Year (from)</option>
                                     {% for year in year_search %}
                                       <option value="{{year}}" style="text-align: center;">{{year}}</option>
@@ -165,7 +165,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control search-fields" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="color">
+                                <select class="form-control" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="color">
                                     <option selected="true" value="" style="text-align: center;">Color</option>
                                     {% for color in color_search %}
                                       <option value="{{color}}" style="text-align: center;">{{color}}</option>
@@ -173,7 +173,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control search-fields" onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="body_style">
+                                <select class="form-control" onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();' name="body_style">
                                     <option selected="true" value="" style="text-align: center;">Body</option>
                                     {% for body_style in body_style_search %}
                                       <option value="{{body_style}}" style="text-align: center;">{{body_style}}</option>

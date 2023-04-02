@@ -4,12 +4,12 @@ from django.contrib import messages
 from .models import Specification
 from cars.models import Car
 from django.shortcuts import get_object_or_404
-from django.core.mail import send_mail
-from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
-
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 # Create your views here.
 
@@ -110,13 +110,13 @@ def notifyUser(sender, instance, created,  *args, **kwargs):
 
     specs = Specification.objects.filter(year__lte=instance.year, milage__lte=instance.milage, min_price__lte=instance.price, max_price__gte=instance.price)
 
-    for s in specs:
 
+    for s in specs:
         if s.brand:
             if s.brand.lower()!=instance.brand.lower():
                 continue
         if s.model:
-            if s.model.lower() not in instance.model.lower():
+            if s.model.lower() not in instance.car_title.lower():
                 continue
         if s.body_style:
             if s.body_style!=instance.body_style:
@@ -133,21 +133,20 @@ def notifyUser(sender, instance, created,  *args, **kwargs):
         
         print('\n\nCar Matched to a filter with ID',s.id,'\n\n')
 
-        admin_info = User.objects.get(is_superuser=True)
-        admin_email = admin_info.email
+        user = s.name
+        subject = 'Found you your Car'
+        data = {
+            'user': user,
+            'car': instance.car_title,
+            'id': s.id,
+        }
+        message = render_to_string('notify/foundCar.html',data)
 
-        title = 'CarZone'
-        subject = """{} has matched a Filter that you have submitted.
-        Go to your dashboard.""".format(instance.car_title)
+        email = EmailMessage(subject, message, to=[s.email])
+        email.content_subtype = 'html'
+        email.send()
 
-        send_mail(
-            title,  #title
-            subject,    #subject
-            '', #from (fixed in settings)
-            [s.email],    #to
-            fail_silently=False,
-        )
-        
+    
 
     
 
