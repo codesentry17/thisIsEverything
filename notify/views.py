@@ -9,7 +9,8 @@ from django.db.models.signals import post_save
 
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-from django.conf import settings
+
+import threading
 
 # Create your views here.
 
@@ -21,9 +22,7 @@ def filterForm(request):
     return render(request,'notify/carForm.html',data)
 
 def filterSubmit(request):
-
-    print("This got called")
-    
+        
     if request.method == 'POST':
         user_id = request.POST['user_id']
         name = request.POST['name']
@@ -101,52 +100,49 @@ def deleteFilter(request, id):
     messages.success(request,'You have deleted your Car Filter')
     return redirect('dashboard')
 
-
-
 @receiver(post_save, sender=Car)
 def notifyUser(sender, instance, created,  *args, **kwargs):
+    def execute_in_thread():
+        # received one tuple from the Car model...
+        specs = Specification.objects.filter(year__lte=instance.year, milage__lte=instance.milage, min_price__lte=instance.price, max_price__gte=instance.price)
 
-    # received one tuple from the Car model...
+        for s in specs:
+            if s.brand:
+                if s.brand.lower()!=instance.brand.lower():
+                    continue
+            if s.model:
+                if s.model.lower() not in instance.car_title.lower():
+                    continue
+            if s.body_style:
+                if s.body_style!=instance.body_style:
+                    continue
+            if s.fuel:
+                if s.fuel!=instance.fuel_type:
+                    continue
+            if s.transmission:
+                if s.transmission!=instance.transmission:
+                    continue
+            if s.color:
+                if s.color!=instance.color:
+                    continue
+            
+            print('\n\nCar Matched to a filter with ID',s.id,'\n\n')
 
-    specs = Specification.objects.filter(year__lte=instance.year, milage__lte=instance.milage, min_price__lte=instance.price, max_price__gte=instance.price)
+            user = s.name
+            subject = 'Found you your Car'
+            data = {
+                'user': user,
+                'car': instance.car_title,
+                'id': s.id,
+            }
+            message = render_to_string('notify/foundCar.html',data)
 
+            email = EmailMessage(subject, message, to=[s.email])
+            email.content_subtype = 'html'
+            email.send()
 
-    for s in specs:
-        if s.brand:
-            if s.brand.lower()!=instance.brand.lower():
-                continue
-        if s.model:
-            if s.model.lower() not in instance.car_title.lower():
-                continue
-        if s.body_style:
-            if s.body_style!=instance.body_style:
-                continue
-        if s.fuel:
-            if s.fuel!=instance.fuel_type:
-                continue
-        if s.transmission:
-            if s.transmission!=instance.transmission:
-                continue
-        if s.color:
-            if s.color!=instance.color:
-                continue
-        
-        print('\n\nCar Matched to a filter with ID',s.id,'\n\n')
-
-        user = s.name
-        subject = 'Found you your Car'
-        data = {
-            'user': user,
-            'car': instance.car_title,
-            'id': s.id,
-        }
-        message = render_to_string('notify/foundCar.html',data)
-
-        email = EmailMessage(subject, message, to=[s.email])
-        email.content_subtype = 'html'
-        email.send()
-
-    
+    thread = threading.Thread(target=execute_in_thread)
+    thread.start()
 
     
 
