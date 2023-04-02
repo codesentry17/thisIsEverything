@@ -33,7 +33,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-9 col-md-6" style="margin-left: 50px;">
+            <div class="col-lg-10 col-md-6">
                 <div class="row">
                     {% for car in aucCars %}
                     <div class="col-lg-4 col-md-6">
@@ -115,10 +115,10 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-lg-2 col-md-6" style="margin-left: auto; margin-right: auto;"> 
+            <div class="col-lg-2 col-md-6"> 
                 <div style="position: sticky; top: 120px;">
                     <!-- Advanced search start -->
-                    <div class="widget advanced-search2" style="padding-top: 0px; padding-left: 0px">
+                    <div class="widget advanced-search2" style="padding-top: 0px; padding-left: 0px; padding-right: 0px;">
                         <form action="{% url 'aucSearch' %}" method="">
                             <div class="form-group">
                                 <input type="text" name="keyword" placeholder="Search by name" class="form-control">

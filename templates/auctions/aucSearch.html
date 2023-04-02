@@ -21,7 +21,7 @@
 <div class="featured-car content-area">
     <div class="container custom-container">
         <div class="row">
-            <div class="col-lg-8 col-md-12" style="margin-left: 50px;">
+            <div class="col-lg-9 col-md-12">
                 <div class="row">
                 {% for car in aucCars %}
                     <div class="col-lg-4 col-md-6">
@@ -87,11 +87,8 @@
                                 </div>
                             </div>
                             <div class="footer clearfix">
-                                <div class="pull-left ratings days">
-                                    <p class="cartype">{{car.body_style}}</p>
-                                </div>
-                                <div class="pull-right">
-                                    <p class="price">Min Bid Rs. {{car.price | intcomma}}</p>
+                                <div class="pull-left days">
+                                    <p><b>Starting Bid: </b><span class="price">Rs. {{car.price | intcomma}}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +98,7 @@
                 {% endfor %}
                 </div>
             </div>
-            <div class="col-lg-3 col-md-12" style="margin-left: auto; margin-right: auto;">
+            <div class="col-lg-3 col-md-12">
                 <div style="position: sticky;
                     top: 120px;
                     border: 2px solid red;

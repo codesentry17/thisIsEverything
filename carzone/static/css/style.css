@@ -5898,7 +5898,7 @@ footer {
 }
 
 .range-slider label {
-    font-size: 14px;
+    font-size: 15px;
     color: #535353;
     font-weight: 500;
     margin-bottom: 12px;
@@ -9773,7 +9773,7 @@ a.nav-link.active{
     width: 75%;
     transition-duration: 0.4s;
     cursor: pointer;
-    border: 2px solid pink;
+    border: 2px solid red;
     border-radius: 30px;
 }
 .buttonX:hover{
