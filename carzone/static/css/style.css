@@ -9780,3 +9780,8 @@ a.nav-link.active{
     background-color: #f44336;
     color: white;
 }
+
+
+.custom-container{
+    max-width: 1400px;
+}
