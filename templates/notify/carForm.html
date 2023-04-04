@@ -23,9 +23,8 @@
 <div class="contact-2 content-area-5">
     <div class="container">
         <!-- Main title -->
-        <div class="main-title text-center">
+        <div class="main-title">
             <h1>Get Notified when your Filters <span>Match</span></h1>
-            <h3>Fill whatever field is necessary</h3>
         </div>
         {% include 'includes/messages.html' %}
         <form action="{% url 'filterSubmit' %}" method="POST"
@@ -45,10 +44,14 @@
                         <div class="col-md-3" style="margin-right: auto;">
                             <h5>Email</h5>
                             <div class="form-group" style="text-align: right;">
-                                <input type="email" name="email" class="form-control" placeholder="ex: johndoe@gmail.com" required>
+                                <input type="email" name="email" class="form-control" placeholder="ex: johndoe@gmail.com" required {% if user.is_authenticated %} value="{{user.email}}" {% endif %}>
                                 <i style="font-size: small;">required</i>
                             </div>
                         </div>
+                    </div>
+                    <br><br>
+                    <div class="row text-center">
+                        <h3 class="mx-auto">Fill whatever field is necessary</h3>
                     </div>
                     <br><br>
                     <div class="row">
