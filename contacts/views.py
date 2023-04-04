@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Contact
-from django.core.mail import send_mail
 from django.contrib.auth.models import User
+
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+import threading
+
 
 
 # Create your views here.
@@ -32,16 +36,23 @@ def inquiry(request):
         first_name=first_name, last_name=last_name, customer_need=customer_need, city=city,
         state=state, email=email, phone=phone, message=message)
 
-        admin_info = User.objects.get(is_superuser=True)
-        admin_email = admin_info.email
-        send_mail(
-                'New Car Inquiry',  #title
-                'You have a new inquiry for the car ' + car_title + '. Please login to your admin panel for more info.',    #subject
-                '', #from (fixed in settings)
-                [admin_email],    #to
-                fail_silently=False,
-            )
-        print(admin_email)
+        def execute_in_thread():
+            admin_info = User.objects.get(is_superuser=True)
+            admin_email = admin_info.email
+            subject = 'New Car Inquiry'
+            message = render_to_string('emailTemplate.html',{'mailType':1, 'car_title':car_title})
+            eMail = EmailMessage(subject, message, to=[admin_email])
+            eMail.content_subtype = 'html'
+            eMail.send()
+
+            subject = 'Thank you for Inquiring'
+            message = render_to_string('emailTemplate.html',{'mailType':2, 'car_title':car_title})
+            eMail = EmailMessage(subject, message, to=[email])
+            eMail.content_subtype = 'html'
+            eMail.send()
+                        
+        thread = threading.Thread(target=execute_in_thread)
+        thread.start()
 
         contact.save()
         messages.success(request, 'Your request has been submitted, we will get back to you shortly.')

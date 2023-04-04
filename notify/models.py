@@ -36,7 +36,7 @@ class Specification(models.Model):
             text += "Body: "+self.color.capitalize()+"<br>"
 
         text += "Year: "+str(self.year)+" Onwards<br>"
-        text += "Mileage: "+str(self.milage)+"+<br>"
+        text += "Mileage: "+str(self.milage)+" +<br>"
         text += "Rs. "+str(self.min_price)+" << Price >> Rs. "+str(self.max_price)
         
         return mark_safe(text)

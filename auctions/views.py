@@ -1,10 +1,13 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from .models import Auction, aucContacts
+
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+import threading
 
 # Create your views here.
 
@@ -30,16 +33,24 @@ def aucInquiry(request):
     contact = aucContacts(car_id=car_id, car_title=car_title, user_id=user_id,
         first_name=first_name, last_name=last_name, email=email, phone=phone, bid=bid, message=message)
     
-    admin_info = User.objects.get(is_superuser=True)
-    admin_email = admin_info.email
-    
-    send_mail(
-            'New Car Bid',  #title
-            'You have a new bidding for the car ' + car_title + '. Please login to your admin panel for more info.',    #subject
-            '', #from (fixed in settings)
-            [admin_email],    #to
-            fail_silently=False,
-            )
+
+    def execute_in_thread():
+        admin_info = User.objects.get(is_superuser=True)
+        admin_email = admin_info.email
+        subject = 'New Car Bid'
+        message = render_to_string('emailTemplate.html',{'mailType':3, 'car_title':car_title})
+        eMail = EmailMessage(subject, message, to=[admin_email])
+        eMail.content_subtype = 'html'
+        eMail.send()
+        
+        subject = 'Thank you for placing your Bid'
+        message = render_to_string('emailTemplate.html',{'mailType':4, 'car_title':car_title})
+        eMail = EmailMessage(subject, message, to=[email])
+        eMail.content_subtype = 'html'
+        eMail.send()
+
+    thread = threading.Thread(target=execute_in_thread)
+    thread.start()
     
     contact.save()
     messages.success(request, 'Your bidding request has been submitted')

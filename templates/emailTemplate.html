@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarZone</title>
+</head>
+<body>
+    {% if mailType == 1 %}
+        <h3>You have a new inquiry for the car {{car_title}}</h3>
+        <p>Please login to your admin panel for more info.</p>
+    {% elif mailType == 2 %}
+        <!-- thank you for enquiring Car -->
+        <h3>Thank you for inquiring about <span style="display:inline-block;"><h2>{{car_title}}</h2></span></h3>
+        <p>Our Admin will get in touch with you soon</p>
+    {% elif mailType == 3 %}
+        <h3>You hava a new bid placed on the car {{car_title}}</h3>
+        <p>Please login to your admin panel for more info.</p>
+    {% elif mailType == 4 %}
+        <!-- thank you for bidding -->
+        <h3>Thank you for bidding on <span style="display:inline-block;"><h2>{{car_title}}</h2></span></h3>
+        <p>Our Admin will get in touch with you soon (should you win)</p>
+    {% else %}
+    <!-- notify message -->
+        <p>Hello {{ user }},</p>
+        <p>
+            <b>{{ car }}</b> has matched your filter. <a href="http://localhost:8000/notify/{{id}}">Visit site?</a>
+        </p>
+    {% endif %}
+</body>
+</html>

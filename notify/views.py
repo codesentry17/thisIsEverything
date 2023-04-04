@@ -79,8 +79,8 @@ def foundCar(request,id):
         filters['Color']=specs.color.capitalize()
         cars = cars.filter(color__icontains=specs.color)
 
-    filters['Year']=specs.year
-    filters['Mileage']=specs.milage
+    filters['Year']=str(specs.year)+' onwards'
+    filters['Mileage']=str(specs.milage)+' +'
     filters['Min Price']=specs.min_price
     filters['Max Price']=specs.max_price
 
@@ -135,7 +135,7 @@ def notifyUser(sender, instance, created,  *args, **kwargs):
                 'car': instance.car_title,
                 'id': s.id,
             }
-            message = render_to_string('notify/foundCar.html',data)
+            message = render_to_string('emailTemplate.html',data)
 
             email = EmailMessage(subject, message, to=[s.email])
             email.content_subtype = 'html'

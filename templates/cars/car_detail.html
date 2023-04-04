@@ -253,7 +253,6 @@
                                 </div>
                                   <div class="form-group">
                                       <select class="form-control" id="sel1" name="customer_need">
-                                        <option value="">None</option>
                                         <option value="I'm interested in this">I'm interested in this</option>
                                         <option value="I'd like to know your best price for this">I'd like to know your best price for this</option>
                                         <option value="I'd like to test drive this">I'd like to test drive this</option>
@@ -269,10 +268,10 @@
                                   <label for="name" class="col-form-label">I live in</label>
                                   <div class="row">
                                     <div class="col">
-                                      <input type="text" name="city" class="form-control" placeholder="City" required>
+                                      <input type="text" name="city" class="form-control" placeholder="City">
                                     </div>
                                     <div class="col">
-                                      <input type="text" name="state" class="form-control" placeholder="State" required>
+                                      <input type="text" name="state" class="form-control" placeholder="State">
                                     </div>
                                   </div>
                                 </div>
@@ -280,9 +279,10 @@
                                 <div class="form-group">
                                   <div class="row">
                                     <div class="col">
-                                        <label for="name" class="col-form-label">You can reach me by email at</label>
+                                        <label for="email" class="col-form-label">You can reach me by email at</label>
                                       <input type="email" name="email" class="form-control" placeholder="Email Address"
                                        {% if user.is_authenticated %} value="{{user.email}}"  {% endif %} required>
+                                       <i style="font-size: small; margin-left: 80%;">required</i>
                                     </div>
                                     <div class="col">
                                         <label for="phone" class="col-form-label">or by phone at</label>
