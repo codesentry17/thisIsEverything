@@ -6,6 +6,8 @@ from cars.models import Car
 from django.shortcuts import get_object_or_404
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.contrib.auth.decorators import login_required
+
 
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
@@ -14,6 +16,7 @@ import threading
 
 # Create your views here.
 
+@login_required(login_url = 'login')
 def filterForm(request):
 
     year = [x for x in range(2010,datetime.now().year)]
@@ -22,7 +25,6 @@ def filterForm(request):
     return render(request,'notify/carForm.html',data)
 
 def filterSubmit(request):
-        
     if request.method == 'POST':
         user_id = request.POST['user_id']
         name = request.POST['name']
@@ -51,7 +53,7 @@ def filterSubmit(request):
 
     return redirect('/accounts/dashboard')
 
-
+@login_required(login_url = 'login')
 def foundCar(request,id):
 
     "got the Specification row from id"

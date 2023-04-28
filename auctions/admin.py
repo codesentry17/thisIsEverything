@@ -11,9 +11,9 @@ class AuctionAdmin(admin.ModelAdmin):
     thumbnail.short_description = 'Car Image'
     list_display = ('id','thumbnail','car_title', 'city', 'color', 'brand', 'year', 'body_style', 'fuel_type','sell_date',)
     list_display_links = ('id', 'thumbnail', 'car_title')
-    list_editable = ['sell_date',]
+    list_editable = ('sell_date',)
     search_fields = ('id', 'car_title', 'city', 'brand', 'body_style','fuel_type')
-    list_filter = ('city', 'brand', 'body_style', 'fuel_type')
+    list_filter = ('sell_date', 'brand', 'body_style', 'fuel_type', 'city')
 
 admin.site.register(Auction, AuctionAdmin)  
 

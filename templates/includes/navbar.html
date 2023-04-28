@@ -71,11 +71,7 @@
                         {% else %}
                         class="nav-link"
                         {% endif %}
-                        {% if user.is_authenticated %}
-                        href="{% url 'filterForm' %}"
-                        {% else %}
-                        href="{% url 'login' %}?next={% url 'filterForm' %}"
-                        {% endif %}>Notify</a>
+                        href="{% url 'filterForm' %}">Notify</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a
