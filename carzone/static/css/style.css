@@ -418,7 +418,7 @@ button:focus {
     font-size: 12px;
     position: fixed;
     bottom: 25px;
-    left: 25px;
+    right: 25px;
     box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     z-index:1000 !important;
